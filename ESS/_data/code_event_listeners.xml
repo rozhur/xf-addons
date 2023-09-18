@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code_event_listeners>
+  <listener event_id="app_setup" execute_order="10" callback_class="ZD\ESS\Listener" callback_method="appSetup" active="1"/>
+  <listener event_id="entity_pre_save" execute_order="10" callback_class="ZD\ESS\Listener" callback_method="entityPreSave" active="1"/>
+  <listener event_id="templater_global_data" execute_order="10" callback_class="ZD\ESS\Listener" callback_method="templaterGlobalData" active="1"/>
+  <listener event_id="visitor_setup" execute_order="10" callback_class="ZD\ESS\Listener" callback_method="visitorSetup" active="1"/>
+</code_event_listeners>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="public" title="zdir_macros" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:macro name="custom_link_textboxrow" 
+		  arg-name="zdir_custom_link" 
+		  arg-target="!" 
+		  arg-link="!"
+		  arg-explain=""
+		  arg-validationUrl="!">
+	<xf:if is="$target.canEditCustomLink()">
+		<xf:textboxrow name="{$name}" value="{$link}"
+					   minlength="{$target.custom_link_length_limits.min}"
+					   maxlength="{$target.custom_link_length_limits.max}"
+					   label="{{ phrase('zdir_custom_link') }}"
+					   explain="{$explain}"
+					   validation-url="{$validationUrl}" />
+	</xf:if>
+</xf:macro>]]></template>
+</templates>

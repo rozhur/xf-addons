@@ -1,0 +1,8 @@
+{
+  "additional_files": [
+    "js/zd/ess"
+  ],
+  "minify": [
+    "js/zd/ess/message.js"
+  ]
+}

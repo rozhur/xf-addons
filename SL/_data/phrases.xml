@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="zdsl_display_user_as_seller" version_id="100010" version_string="1.0.0"><![CDATA[Установить статус "Seller"]]></phrase>
+  <phrase title="zdsl_if_selected_this_user_will_be_shown_as_seller" version_id="100010" version_string="1.0.0"><![CDATA[Если включено, то этот пользователь будет отображаться как продавец.]]></phrase>
+  <phrase title="zdsl_seller" version_id="100010" version_string="1.0.0"><![CDATA[Seller]]></phrase>
+</phrases>

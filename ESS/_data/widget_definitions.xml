@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget_definitions>
+  <widget_definition definition_id="zdess_member_followers" definition_class="ZD\ESS\Widget\MemberFollowers"/>
+  <widget_definition definition_id="zdess_member_following" definition_class="ZD\ESS\Widget\MemberFollowing"/>
+  <widget_definition definition_id="zdess_member_reactions" definition_class="ZD\ESS\Widget\MemberReactions"/>
+</widget_definitions>

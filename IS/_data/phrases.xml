@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="option.zdisColoredTaggedUsers" version_id="1000010" version_string="1.0.0"><![CDATA[Colored tagged users]]></phrase>
+  <phrase title="option.zdisSortGroupsByPriority" version_id="1000010" version_string="1.0.0"><![CDATA[Sort user groups by style priority]]></phrase>
+  <phrase title="option_explain.zdisColoredTaggedUsers" version_id="1000070" version_string="1.0.0"><![CDATA[Apply user's group CSS style when mentioned with @.]]></phrase>
+  <phrase title="option_explain.zdisSortGroupsByPriority" version_id="1000010" version_string="1.0.0"><![CDATA[The groups will be sorted by style priority, which can be changed in the group settings. If this option is disabled, the groups will be sorted alphabetically. The option affects the display in the control panel: when editing a user, when viewing a list of groups, etc.]]></phrase>
+  <phrase title="option_group.zdis" version_id="1000070" version_string="1.0.0"><![CDATA[ZDIS: Basic options]]></phrase>
+  <phrase title="option_group_description.zdis" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop.zdisBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[Blue color]]></phrase>
+  <phrase title="style_prop.zdisBorderIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[Border intensify]]></phrase>
+  <phrase title="style_prop.zdisColumnPairsInMemberHeaderBlurb" version_id="1000010" version_string="1.0.0"><![CDATA[Column pairs in member header blurb]]></phrase>
+  <phrase title="style_prop.zdisDisableFloatingTabSelectedLine" version_id="1000070" version_string="1.0.0"><![CDATA[Disable floating selected line of tabs]]></phrase>
+  <phrase title="style_prop.zdisGrayColor" version_id="1000010" version_string="1.0.0"><![CDATA[Gray color]]></phrase>
+  <phrase title="style_prop.zdisGreenColor" version_id="1000010" version_string="1.0.0"><![CDATA[Green color]]></phrase>
+  <phrase title="style_prop.zdisLightGreenColor" version_id="1000010" version_string="1.0.0"><![CDATA[Light green color]]></phrase>
+  <phrase title="style_prop.zdisOliveColor" version_id="1000010" version_string="1.0.0"><![CDATA[Olive color]]></phrase>
+  <phrase title="style_prop.zdisOrangeColor" version_id="1000010" version_string="1.0.0"><![CDATA[Orange color]]></phrase>
+  <phrase title="style_prop.zdisRedColor" version_id="1000010" version_string="1.0.0"><![CDATA[Red color]]></phrase>
+  <phrase title="style_prop.zdisRoyalBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[Royal blue color]]></phrase>
+  <phrase title="style_prop.zdisSilverColor" version_id="1000010" version_string="1.0.0"><![CDATA[Silver color]]></phrase>
+  <phrase title="style_prop.zdisSkyBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[Sky blue color]]></phrase>
+  <phrase title="style_prop.zdisStyleType" version_id="1000010" version_string="1.0.0"><![CDATA[Style type]]></phrase>
+  <phrase title="style_prop.zdisTextHoverIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[Text hover intensify]]></phrase>
+  <phrase title="style_prop.zdisTextIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[Text intensify]]></phrase>
+  <phrase title="style_prop.zdisWrapDetailedUserActivityInTooltip" version_id="1000010" version_string="1.0.0"><![CDATA[Wrap detailed user activity in a tooltip]]></phrase>
+  <phrase title="style_prop.zdisYellowColor" version_id="1000010" version_string="1.0.0"><![CDATA[Yellow color]]></phrase>
+  <phrase title="style_prop_desc.zdisBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisBorderIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisColumnPairsInMemberHeaderBlurb" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisDisableFloatingTabSelectedLine" version_id="1000070" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisGrayColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisGreenColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisLightGreenColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisOliveColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisOrangeColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisRedColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisRoyalBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisSilverColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisSkyBlueColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisStyleType" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisTextHoverIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisTextIntensify" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdisWrapDetailedUserActivityInTooltip" version_id="1000010" version_string="1.0.0"><![CDATA[Detailed user activity will be shown when hovering over the user's activity date.]]></phrase>
+  <phrase title="style_prop_desc.zdisYellowColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_group.zdisBasic" version_id="1000070" version_string="1.0.0"><![CDATA[ZDIS: Basic options]]></phrase>
+  <phrase title="style_prop_group.zdisMember" version_id="1000070" version_string="1.0.0"><![CDATA[ZDIS: Member profiles]]></phrase>
+  <phrase title="style_prop_group_desc.zdisBasic" version_id="1000070" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_group_desc.zdisMember" version_id="1000070" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_vgroup.zdisMiscColors" version_id="1000070" version_string="1.0.0"><![CDATA[Misc colors]]></phrase>
+  <phrase title="style_prop_vgroup.zdisMiscColorsIntensify" version_id="1000070" version_string="1.0.0"><![CDATA[Misc colors intensify]]></phrase>
+  <phrase title="zdis_username_styling" version_id="1000010" version_string="1.0.0"><![CDATA[Username styling]]></phrase>
+</phrases>

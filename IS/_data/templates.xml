@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="zdis_style_chooser" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('style_chooser') }}</xf:title>
+
+<div class="block">
+	<div class="block-container">
+		<xf:if is="$style">
+			<div class="block-body">
+				<xf:inforow rowtype="confirm">
+					{{ phrase('please_confirm_that_you_would_like_to_change_to_following_style:') }}
+					<strong>{$style.title}</strong>
+				</xf:inforow>
+			</div>
+
+			<xf:submitrow rowtype="simple"><xf:html>
+				<xf:button href="{{ link('account/style', null, {
+					'style_id': $style.style_id,
+					't': csrf_token(),
+					'_xfRedirect': $redirect})
+				}}" class="button--primary" icon="save" />
+			</xf:html></xf:submitrow>
+		<xf:else />
+			<a href="{{ link('account/style', null, {
+				'style_id': 0, '_xfRedirect': $redirect, 't': csrf_token()
+			}) }}" class="menu-linkRow menu-linkRow--alt">{{ phrase('use_default_style') }}</a>
+			<div class="block-body">
+				<ul class="listPlain listColumns">
+					<xf:foreach loop="$styles" value="$style">
+						<li>
+							<a href="{{ link('account/style', null, {
+								'style_id': $style.style_id,
+								'_xfRedirect': $redirect,
+								't': csrf_token()
+							}) }}" class="menu-linkRow">{$style.title}{{ !$style.user_selectable ? ' *' : '' }}</a>
+						</li>
+					</xf:foreach>
+				</ul>
+			</div>
+		</xf:if>
+	</div>
+</div>]]></template>
+  <template type="public" title="zdis_core.less" version_id="1000070" version_string="1.0.0"><![CDATA[.p-body-sidebar, .p-body-sideNav, .p-body-sidePanel
+{
+	.block:last-child
+	{
+		margin-bottom: 0;
+	}
+}
+
+@_blockColor: @xf-blockTabHeaderSelected--border-color;
+@_menuColor: @xf-menuTabHeaderSelected--border-color;
+
+.hScroller 
+{
+	overflow-x: hidden;
+}
+
+.is-selectedLine 
+{
+	.tabs-tab.is-active
+	{
+		border-color: transparent;
+	}
+}
+
+.selected-line 
+{
+	user-select: none;
+	pointer-events: none;
+    position: absolute;
+    height: @xf-borderSizeFeature;
+    bottom: 0;
+    transition: all @xf-animationSpeed ease;
+	
+	.hScroller &
+	{
+		margin-bottom: 30px;
+	}
+	
+	.block-tabHeader & 
+	{
+		background: @_blockColor;
+	}
+	
+	.menu-tabHeader & 
+	{
+		background: @_menuColor;
+	}
+	
+<xf:if is="{{ property('zdisDisableFloatingTabSelectedLine') }}">
+	display: none;
+</xf:if>
+}
+
+@media (min-width: @xf-messageSingleColumnWidth) 
+{
+	.message-user
+	{
+		position: -webkit-sticky;
+		position: sticky;
+		z-index: 1;
+		
+		.message-userArrow 
+		{
+			right: -(@xf-paddingLarge + 1px);
+
+			[data-type="profile_post"] & 
+			{
+				top: 10px;
+			}
+		}
+	}
+}]]></template>
+  <template type="public" title="zdis_js" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:if is="$xf.app.config.development.fullJs">
+	<xf:js src="zd/is/vendor/sticky-kit/sticky-kit.js" min="1" />
+	<xf:js src="zd/is/core.js" min="1" />
+	<xf:else />
+	<xf:js src="zd/is/core-compiled.js" />
+</xf:if>]]></template>
+  <template type="public" title="zdis_labels.less" version_id="1000010" version_string="1.0.0"><![CDATA[.label
+{
+    &.label--red { .m-labelVariation(contrast(@xf-zdisRedColor), @xf-zdisRedColor, mix(@xf-zdisStyleType, @xf-zdisRedColor, @xf-zdisBorderIntensify)); }
+    &.label--green { .m-labelVariation(contrast(@xf-zdisGreenColor), @xf-zdisGreenColor, mix(@xf-zdisStyleType, @xf-zdisGreenColor, @xf-zdisBorderIntensify)); }
+    &.label--olive { .m-labelVariation(contrast(@xf-zdisOliveColor), @xf-zdisOliveColor, mix(@xf-zdisStyleType, @xf-zdisOliveColor, @xf-zdisBorderIntensify)); }
+    &.label--lightGreen { .m-labelVariation(contrast(@xf-zdisLightGreenColor), @xf-zdisLightGreenColor, mix(@xf-zdisStyleType, @xf-zdisLightGreenColor, @xf-zdisBorderIntensify)); }
+    &.label--blue { .m-labelVariation(contrast(@xf-zdisBlueColor), @xf-zdisBlueColor, mix(@xf-zdisStyleType, @xf-zdisBlueColor, @xf-zdisBorderIntensify)); }
+    &.label--royalBlue { .m-labelVariation(contrast(@xf-zdisRoyalBlueColor), @xf-zdisRoyalBlueColor, mix(@xf-zdisStyleType, @xf-zdisRoyalBlueColor, @xf-zdisBorderIntensify)); }
+    &.label--skyBlue { .m-labelVariation(contrast(@xf-zdisSkyBlueColor), @xf-zdisSkyBlueColor, mix(@xf-zdisStyleType, @xf-zdisSkyBlueColor, @xf-zdisBorderIntensify)); }
+    &.label--gray { .m-labelVariation(contrast(@xf-zdisGrayColor), @xf-zdisGrayColor, mix(@xf-zdisStyleType, @xf-zdisGrayColor, @xf-zdisBorderIntensify)); }
+    &.label--silver { .m-labelVariation(contrast(@xf-zdisSilverColor), @xf-zdisSilverColor, mix(@xf-zdisStyleType, @xf-zdisSilverColor, @xf-zdisBorderIntensify)); }
+    &.label--yellow { .m-labelVariation(contrast(@xf-zdisYellowColor), @xf-zdisYellowColor, mix(@xf-zdisStyleType, @xf-zdisYellowColor, @xf-zdisBorderIntensify)); }
+    &.label--orange { .m-labelVariation(contrast(@xf-zdisOrangeColor), @xf-zdisOrangeColor, mix(@xf-zdisStyleType, @xf-zdisOrangeColor, @xf-zdisBorderIntensify)); }
+    
+    &.label--error { .m-labelVariation(contrast(@xf-errorColor), @xf-errorColor, mix(@xf-zdisStyleType, @xf-errorColor, @xf-zdisBorderIntensify)); }
+}]]></template>
+  <template type="public" title="zdis_user_banners.less" version_id="1000010" version_string="1.0.0"><![CDATA[.userBanner
+{
+    &.userBanner--red { .m-userBannerVariation(contrast(@xf-zdisRedColor), @xf-zdisRedColor, mix(@xf-zdisStyleType, @xf-zdisRedColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--green { .m-userBannerVariation(contrast(@xf-zdisGreenColor), @xf-zdisGreenColor, mix(@xf-zdisStyleType, @xf-zdisGreenColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--olive { .m-userBannerVariation(contrast(@xf-zdisOliveColor), @xf-zdisOliveColor, mix(@xf-zdisStyleType, @xf-zdisOliveColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--lightGreen { .m-userBannerVariation(contrast(@xf-zdisLightGreenColor), @xf-zdisLightGreenColor, mix(@xf-zdisStyleType, @xf-zdisLightGreenColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--blue { .m-userBannerVariation(contrast(@xf-zdisBlueColor), @xf-zdisBlueColor, mix(@xf-zdisStyleType, @xf-zdisBlueColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--royalBlue { .m-userBannerVariation(contrast(@xf-zdisRoyalBlueColor), @xf-zdisRoyalBlueColor, mix(@xf-zdisStyleType, @xf-zdisRoyalBlueColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--skyBlue { .m-userBannerVariation(contrast(@xf-zdisSkyBlueColor), @xf-zdisSkyBlueColor, mix(@xf-zdisStyleType, @xf-zdisSkyBlueColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--gray { .m-userBannerVariation(contrast(@xf-zdisGrayColor), @xf-zdisGrayColor, mix(@xf-zdisStyleType, @xf-zdisGrayColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--silver { .m-userBannerVariation(contrast(@xf-zdisSilverColor), @xf-zdisSilverColor, mix(@xf-zdisStyleType, @xf-zdisSilverColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--yellow { .m-userBannerVariation(contrast(@xf-zdisYellowColor), @xf-zdisYellowColor, mix(@xf-zdisStyleType, @xf-zdisYellowColor, @xf-zdisBorderIntensify)); }
+    &.userBanner--orange { .m-userBannerVariation(contrast(@xf-zdisOrangeColor), @xf-zdisOrangeColor, mix(@xf-zdisStyleType, @xf-zdisOrangeColor, @xf-zdisBorderIntensify)); }
+}
+
+<xf:foreach loop="$app.userBanners" key="$id" value="$banner" if="$banner.zdis_banner_css">
+	.userBanner--style{$id}
+	{
+		{$banner.zdis_banner_css|raw}
+	}
+</xf:foreach>]]></template>
+  <template type="public" title="zdis_username_styles.less" version_id="1000010" version_string="1.0.0"><![CDATA[a.username, .username
+{
+	&.username--primary
+	{
+		color: @xf-linkColor;
+	}
+	&.username--accent
+	{
+		color: @xf-textColorAccentContent;
+	}
+    &.username--red 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisRedColor, @xf-zdisTextIntensify);
+    }
+    &.username--green 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisGreenColor, @xf-zdisTextIntensify);
+    }
+    &.username--olive 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisOliveColor, @xf-zdisTextIntensify); 
+    }
+    &.username--lightGreen 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisLightGreenColor, @xf-zdisTextIntensify); 
+    }
+    &.username--blue 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisBlueColor, @xf-zdisTextIntensify); 
+    }
+    &.username--royalBlue 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisRoyalBlueColor, @xf-zdisTextIntensify); 
+    }
+    &.username--skyBlue 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisSkyBlueColor, @xf-zdisTextIntensify);
+    }
+    &.username--gray 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisGrayColor, @xf-zdisTextIntensify);
+    }
+    &.username--silver 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisSilverColor, @xf-zdisTextIntensify);
+    }
+    &.username--yellow 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisYellowColor, @xf-zdisTextIntensify);
+    }
+    &.username--orange 
+    { 
+        color: mix(@xf-zdisStyleType, @xf-zdisOrangeColor, @xf-zdisTextIntensify);
+    }
+}
+
+a.username
+{
+	&.username--primary
+	{
+		&:hover
+		{
+			color: @xf-linkHoverColor;
+		}
+	}
+	
+	&.username--accent
+	{
+		&:hover
+		{
+			color: mix(@xf-zdisStyleType, @xf-textColorAccentContent, @xf-zdisTextIntensify);
+		}
+	}
+	
+    &.username--red 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisRedColor, @xf-zdisTextHoverIntensify);
+        }
+    }
+    &.username--green 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisGreenColor, @xf-zdisTextHoverIntensify);
+        }
+    }
+    &.username--olive 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisOliveColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--lightGreen 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisLightGreenColor, @xf-zdisTextHoverIntensify);
+        }
+    }
+    &.username--blue 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisBlueColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--royalBlue 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisRoyalBlueColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--skyBlue 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisSkyBlueColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--gray 
+    {
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisGrayColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--silver 
+    { 
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisSilverColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+    &.username--yellow 
+    { 
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisYellowColor, @xf-zdisTextHoverIntensify);
+        }
+    }
+    &.username--orange 
+    { 
+        &:hover
+        {
+            color: mix(@xf-zdisStyleType, @xf-zdisOrangeColor, @xf-zdisTextHoverIntensify); 
+        }
+    }
+}]]></template>
+</templates>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="zdisBlueColor" group_name="color" title="Blue color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20040">
+    <value>"#0008e3"</value>
+  </style_property>
+  <style_property property_name="zdisBorderIntensify" group_name="color" title="Border intensify" property_type="value" value_type="unit" value_group="zdisMiscColorsIntensify" display_order="20130">
+    <value>"15%"</value>
+  </style_property>
+  <style_property property_name="zdisColumnPairsInMemberHeaderBlurb" group_name="zdisMember" title="Column pairs in member header blurb" property_type="value" value_type="boolean" display_order="0">
+    <value>0</value>
+  </style_property>
+  <style_property property_name="zdisDisableFloatingTabSelectedLine" group_name="zdisBasic" title="Disable floating selected line of tabs" property_type="value" value_type="boolean" display_order="0">
+    <value>0</value>
+  </style_property>
+  <style_property property_name="zdisGrayColor" group_name="color" title="Gray color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20070">
+    <value>"gray"</value>
+  </style_property>
+  <style_property property_name="zdisGreenColor" group_name="color" title="Green color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20010">
+    <value>"rgb(61, 121, 63)"</value>
+  </style_property>
+  <style_property property_name="zdisLightGreenColor" group_name="color" title="Light green color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20030">
+    <value>"#ccf9c8"</value>
+  </style_property>
+  <style_property property_name="zdisOliveColor" group_name="color" title="Olive color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20020">
+    <value>"olive"</value>
+  </style_property>
+  <style_property property_name="zdisOrangeColor" group_name="color" title="Orange color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20090">
+    <value>"#ffcb00"</value>
+  </style_property>
+  <style_property property_name="zdisRedColor" group_name="color" title="Red color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20000">
+    <value>"rgb(200, 68, 72)"</value>
+  </style_property>
+  <style_property property_name="zdisRoyalBlueColor" group_name="color" title="Royal blue color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20050">
+    <value>"royalblue"</value>
+  </style_property>
+  <style_property property_name="zdisSilverColor" group_name="color" title="Silver color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20080">
+    <value>"silver"</value>
+  </style_property>
+  <style_property property_name="zdisSkyBlueColor" group_name="color" title="Sky blue color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20060">
+    <value>"#7cc3e0"</value>
+  </style_property>
+  <style_property property_name="zdisStyleType" group_name="color" title="Style type" property_type="value" value_type="radio" value_group="zdisMiscColorsIntensify" display_order="20095">
+    <value_parameters>black={{ phrase('light') }}
+white={{ phrase('dark') }}</value_parameters>
+    <value>"black"</value>
+  </style_property>
+  <style_property property_name="zdisTextHoverIntensify" group_name="color" title="Text hover intensify" property_type="value" value_type="unit" value_group="zdisMiscColorsIntensify" display_order="20120">
+    <value>"20%"</value>
+  </style_property>
+  <style_property property_name="zdisTextIntensify" group_name="color" title="Text intensify" property_type="value" value_type="unit" value_group="zdisMiscColorsIntensify" display_order="20100">
+    <value>"10%"</value>
+  </style_property>
+  <style_property property_name="zdisWrapDetailedUserActivityInTooltip" group_name="zdisMember" title="Wrap detailed user activity in a tooltip" description="Detailed user activity will be shown when hovering over the user's activity date." property_type="value" value_type="boolean" display_order="10">
+    <value>0</value>
+  </style_property>
+  <style_property property_name="zdisYellowColor" group_name="color" title="Yellow color" property_type="value" value_type="color" value_group="zdisMiscColors" display_order="20090">
+    <value>"#ffff91"</value>
+  </style_property>
+</style_properties>

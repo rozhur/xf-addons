@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="admin_permission.zdessCreateDeleteForum" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Create / delete forums]]></phrase>
+  <phrase title="admin_permission.zdessDebug" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: View debug info]]></phrase>
+  <phrase title="admin_permission.zdessDevelopment" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Manage development options]]></phrase>
+  <phrase title="admin_permission.zdessViewErrorLogs" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: View error logs]]></phrase>
+  <phrase title="alert_warning_insert" version_id="1000010" version_string="1.0.0"><![CDATA[You have been warned: <a href="{url}" data-xf-click="overlay">{title}</a>.]]></phrase>
+  <phrase title="mod_log.forum_zdess_lock" version_id="1000010" version_string="1.0.0"><![CDATA[Forum lock]]></phrase>
+  <phrase title="mod_log.forum_zdess_unlock" version_id="1000010" version_string="1.0.0"><![CDATA[Forum unlock]]></phrase>
+  <phrase title="mod_log.profile_post_zdess_stuck" version_id="1000010" version_string="1.0.0"><![CDATA[Profile post stuck]]></phrase>
+  <phrase title="mod_log.profile_post_zdess_unstuck" version_id="1000010" version_string="1.0.0"><![CDATA[Profile post unstuck]]></phrase>
+  <phrase title="mod_log.thread_zdess_open_allowed" version_id="1000010" version_string="1.0.0"><![CDATA[Lock / unlock allowed]]></phrase>
+  <phrase title="mod_log.thread_zdess_open_disallowed" version_id="1000010" version_string="1.0.0"><![CDATA[Lock / unlock disallowed]]></phrase>
+  <phrase title="option.zdessAddReadOnlyUserGroup" version_id="1000010" version_string="1.0.0"><![CDATA[Add user group on read only]]></phrase>
+  <phrase title="option.zdessConvertingUploadedImages" version_id="1000010" version_string="1.0.0"><![CDATA[Converting uploaded images]]></phrase>
+  <phrase title="option.zdessCustomTitleLength" version_id="1000010" version_string="1.0.0"><![CDATA[Custom title length validation]]></phrase>
+  <phrase title="option.zdessCustomTitleRegex" version_id="1000010" version_string="1.0.0"><![CDATA[Custom title regex validation]]></phrase>
+  <phrase title="option.zdessDefaultAlertUser" version_id="1000010" version_string="1.0.0"><![CDATA[Default alert user]]></phrase>
+  <phrase title="option.zdessLoggingModeratorActions" version_id="1000010" version_string="1.0.0"><![CDATA[Logging moderator actions]]></phrase>
+  <phrase title="option.zdessWarningsPerPage" version_id="1000010" version_string="1.0.0"><![CDATA[Warnings per-page]]></phrase>
+  <phrase title="option_explain.zdessAddReadOnlyUserGroup" version_id="1000010" version_string="1.0.0"><![CDATA[When a user is read only, they can be added to a specific user group while the ban is active. This allows overrides to their user group styling, for example.]]></phrase>
+  <phrase title="option_explain.zdessConvertingUploadedImages" version_id="1000010" version_string="1.0.0"><![CDATA[Forces the conversion of uploaded images to the selected format. For example, selecting JPEG can optimize the space it takes and speed up page loading. Does not affect GIF images.]]></phrase>
+  <phrase title="option_explain.zdessCustomTitleLength" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.zdessCustomTitleRegex" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.zdessDefaultAlertUser" version_id="1000010" version_string="1.0.0"><![CDATA[Applies the specified user to the anonymous notification. You can specify an id or username.]]></phrase>
+  <phrase title="option_explain.zdessLoggingModeratorActions" version_id="1000010" version_string="1.0.0"><![CDATA[In the second option, logs will be recorded even if the user is not a moderator, but is not the author of the edited content.<br />
+With the third option, logs will always be written, without exceptions.]]></phrase>
+  <phrase title="option_explain.zdessWarningsPerPage" version_id="1000010" version_string="1.0.0"><![CDATA[Controls how many warnings are shown on each page of user's full warning list.]]></phrase>
+  <phrase title="option_group.zdess" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Basic options]]></phrase>
+  <phrase title="option_group_description.zdess" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="permission.forum_lockUnlockForum" version_id="1000010" version_string="1.0.0"><![CDATA[Lock / unlock forum]]></phrase>
+  <phrase title="permission.forum_lockUnlockOwnThread" version_id="1000010" version_string="1.0.0"><![CDATA[Lock / unlock own threads]]></phrase>
+  <phrase title="permission.forum_postBehalf" version_id="1000010" version_string="1.0.0"><![CDATA[Post behalf other users]]></phrase>
+  <phrase title="permission.forum_viewForumModerators" version_id="1000010" version_string="1.0.0"><![CDATA[View forum moderators]]></phrase>
+  <phrase title="permission.general_bypassCustomTitleLength" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass custom title length validation]]></phrase>
+  <phrase title="permission.general_bypassCustomTitleRegex" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass custom title regex validation]]></phrase>
+  <phrase title="permission.general_bypassUsernameLength" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass username length validation]]></phrase>
+  <phrase title="permission.general_bypassUsernameRegex" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass username regex validation]]></phrase>
+  <phrase title="permission.general_deleteAnyUsernameHistory" version_id="1000010" version_string="1.0.0"><![CDATA[Delete any username history]]></phrase>
+  <phrase title="permission.general_deleteUsernameHistory" version_id="1000010" version_string="1.0.0"><![CDATA[Delete username history]]></phrase>
+  <phrase title="permission.general_hardDeleteUsernameHistory" version_id="1000010" version_string="1.0.0"><![CDATA[Hard-delete any username history]]></phrase>
+  <phrase title="permission.general_readOnlyUser" version_id="1000010" version_string="1.0.0"><![CDATA[Read only users]]></phrase>
+  <phrase title="permission.profilePost_stickAnyProfilePost" version_id="1000010" version_string="1.0.0"><![CDATA[Stick / unstick any profile post]]></phrase>
+  <phrase title="permission.profilePost_stickProfilePost" version_id="1000010" version_string="1.0.0"><![CDATA[Stick / unstick own post]]></phrase>
+  <phrase title="permission_interface.zdessForumModeratorPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Forum moderator permissions]]></phrase>
+  <phrase title="permission_interface.zdessForumPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Forum permissions]]></phrase>
+  <phrase title="permission_interface.zdessModeratorPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: General moderator permissions]]></phrase>
+  <phrase title="permission_interface.zdessPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: General permissions]]></phrase>
+  <phrase title="permission_interface.zdessProfilePostModeratorPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Profile post moderator permissions]]></phrase>
+  <phrase title="permission_interface.zdessProfilePostPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Profile post permissions]]></phrase>
+  <phrase title="style_prop.zdessCenterOnlineIndicatorOnMediumResponsive" version_id="1000010" version_string="1.0.0"><![CDATA[Center online indicator on medium responsive]]></phrase>
+  <phrase title="style_prop.zdessMessageThreadStarterIndicator" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Message thread starter indicator]]></phrase>
+  <phrase title="style_prop.zdessNegativeReactionScoreColor" version_id="1000010" version_string="1.0.0"><![CDATA[Negative reaction score color]]></phrase>
+  <phrase title="style_prop.zdessPositiveReactionScoreColor" version_id="1000010" version_string="1.0.0"><![CDATA[Positive reaction score color]]></phrase>
+  <phrase title="style_prop.zdessShowPositiveNegativeReactions" version_id="1000010" version_string="1.0.0"><![CDATA[Show positive / negative reactions]]></phrase>
+  <phrase title="style_prop_desc.zdessCenterOnlineIndicatorOnMediumResponsive" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdessMessageThreadStarterIndicator" version_id="1000010" version_string="1.0.0"><![CDATA[Usually a small token attached to the message block, the indicator that a message by thread starter is controlled here]]></phrase>
+  <phrase title="style_prop_desc.zdessNegativeReactionScoreColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdessPositiveReactionScoreColor" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.zdessShowPositiveNegativeReactions" version_id="1000010" version_string="1.0.0"><![CDATA[It will show next to the total reaction score in the format (positive / negative).]]></phrase>
+  <phrase title="style_prop_group.zdessBasic" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Basic options]]></phrase>
+  <phrase title="style_prop_group_desc.zdessBasic" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_group_banner_text.1" version_id="1000010" version_string="1.0.0"><![CDATA[Guest]]></phrase>
+  <phrase title="user_group_banner_text.10" version_id="1000010" version_string="1.0.0"><![CDATA[Banned]]></phrase>
+  <phrase title="user_group_banner_text.2" version_id="1000010" version_string="1.0.0"><![CDATA[Member]]></phrase>
+  <phrase title="user_group_banner_text.3" version_id="1000010" version_string="1.0.0"><![CDATA[Administrate]]></phrase>
+  <phrase title="user_group_banner_text.4" version_id="1000010" version_string="1.0.0"><![CDATA[Moderating]]></phrase>
+  <phrase title="user_group_banner_text.8" version_id="1000010" version_string="1.0.0"><![CDATA[Premium]]></phrase>
+  <phrase title="user_group_banner_text.9" version_id="1000010" version_string="1.0.0"><![CDATA[Read only]]></phrase>
+  <phrase title="user_group_title.1" version_id="1000010" version_string="1.0.0"><![CDATA[Unregistered / Unconfirmed]]></phrase>
+  <phrase title="user_group_title.10" version_id="1000010" version_string="1.0.0"><![CDATA[Banned]]></phrase>
+  <phrase title="user_group_title.2" version_id="1000010" version_string="1.0.0"><![CDATA[Registered]]></phrase>
+  <phrase title="user_group_title.3" version_id="1000010" version_string="1.0.0"><![CDATA[Administrate]]></phrase>
+  <phrase title="user_group_title.4" version_id="1000010" version_string="1.0.0"><![CDATA[Moderating]]></phrase>
+  <phrase title="user_group_title.8" version_id="1000010" version_string="1.0.0"><![CDATA[Premium]]></phrase>
+  <phrase title="user_group_title.9" version_id="1000010" version_string="1.0.0"><![CDATA[Read only]]></phrase>
+  <phrase title="user_group_user_title.1" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_group_user_title.10" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_group_user_title.2" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_group_user_title.3" version_id="1000010" version_string="1.0.0"><![CDATA[Administrator]]></phrase>
+  <phrase title="user_group_user_title.4" version_id="1000010" version_string="1.0.0"><![CDATA[Moderator]]></phrase>
+  <phrase title="user_group_user_title.8" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_group_user_title.9" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="user_title_ladder.0" version_id="1000010" version_string="1.0.0"><![CDATA[New member]]></phrase>
+  <phrase title="user_title_ladder.25" version_id="1000010" version_string="1.0.0"><![CDATA[Active member]]></phrase>
+  <phrase title="user_title_ladder.45" version_id="1000010" version_string="1.0.0"><![CDATA[Well-known member]]></phrase>
+  <phrase title="user_title_ladder.5" version_id="1000010" version_string="1.0.0"><![CDATA[Member]]></phrase>
+  <phrase title="widget_def.zdess_member_followers" version_id="1000010" version_string="1.0.0"><![CDATA[Followers]]></phrase>
+  <phrase title="widget_def.zdess_member_following" version_id="1000010" version_string="1.0.0"><![CDATA[Following]]></phrase>
+  <phrase title="widget_def.zdess_member_reactions" version_id="1000010" version_string="1.0.0"><![CDATA[Reactions]]></phrase>
+  <phrase title="widget_def_desc.zdess_member_followers" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="widget_def_desc.zdess_member_following" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="widget_def_desc.zdess_member_reactions" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="zdess_always" version_id="1000010" version_string="1.0.0"><![CDATA[Always]]></phrase>
+  <phrase title="zdess_always_except_for_own_content" version_id="1000010" version_string="1.0.0"><![CDATA[Always, except for own content]]></phrase>
+  <phrase title="zdess_available_moderator_permissions" version_id="1000010" version_string="1.0.0"><![CDATA[Available moderator permissions]]></phrase>
+  <phrase title="zdess_behalf_criteria" version_id="1000010" version_string="1.0.0"><![CDATA[Behalf criteria]]></phrase>
+  <phrase title="zdess_behalf_of" version_id="1000010" version_string="1.0.0"><![CDATA[Behalf of]]></phrase>
+  <phrase title="zdess_clear_username_history" version_id="1000010" version_string="1.0.0"><![CDATA[Clear username history]]></phrase>
+  <phrase title="zdess_clear_username_history_confirm" version_id="1000010" version_string="1.0.0"><![CDATA[Do you really want to clear username history?]]></phrase>
+  <phrase title="zdess_disable_banner_grouping" version_id="1000010" version_string="1.0.0"><![CDATA[Disable grouping with other banners]]></phrase>
+  <phrase title="zdess_disable_banner_grouping_hint" version_id="1000010" version_string="1.0.0"><![CDATA[If this option is enabled, then this banner will not be displayed with other banners with a higher priority.]]></phrase>
+  <phrase title="zdess_disallow_lock_unlock" version_id="1000010" version_string="1.0.0"><![CDATA[Disallow lock / unlock]]></phrase>
+  <phrase title="zdess_disallow_lock_unlock_hint" version_id="1000010" version_string="1.0.0"><![CDATA[The thread owner will not be able to lock / unlock the thread. Does not affect users with permission to lock / unlock any threads]]></phrase>
+  <phrase title="zdess_display_this_navigation_for_super_admins_only" version_id="1000010" version_string="1.0.0"><![CDATA[Display this navigation for super admins only]]></phrase>
+  <phrase title="zdess_display_within_all_selected_forums" version_id="1000010" version_string="1.0.0"><![CDATA[Display within all selected forums]]></phrase>
+  <phrase title="zdess_given" version_id="1000010" version_string="1.0.0"><![CDATA[Given]]></phrase>
+  <phrase title="zdess_if_selected_users_will_be_able_post_new_threads" version_id="1000010" version_string="1.0.0"><![CDATA[If selected, users will be able to post new threads.]]></phrase>
+  <phrase title="zdess_is_from_mobile" version_id="1000010" version_string="1.0.0"><![CDATA[From mobile device]]></phrase>
+  <phrase title="zdess_last_edited_by_x" version_id="1000010" version_string="1.0.0"><![CDATA[Last edited by {name}]]></phrase>
+  <phrase title="zdess_lock_forum" version_id="1000010" version_string="1.0.0"><![CDATA[Lock forum]]></phrase>
+  <phrase title="zdess_moderated_forums" version_id="1000010" version_string="1.0.0"><![CDATA[Moderated forums]]></phrase>
+  <phrase title="zdess_notify_x" version_id="1000010" version_string="1.0.0"><![CDATA[Notify {name}]]></phrase>
+  <phrase title="zdess_online_now_from_mobile" version_id="1000010" version_string="1.0.0"><![CDATA[Online now from a mobile device]]></phrase>
+  <phrase title="zdess_only_display_within_locked_forums" version_id="1000010" version_string="1.0.0"><![CDATA[Only display within locked forums]]></phrase>
+  <phrase title="zdess_only_display_within_unlocked_forums" version_id="1000010" version_string="1.0.0"><![CDATA[Only display within unlocked forums]]></phrase>
+  <phrase title="zdess_please_enter_another_custom_title_required_format" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter another custom title. The entered value does not match the required format.]]></phrase>
+  <phrase title="zdess_please_enter_custom_title_that_is_at_least_x_characters_long" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter a custom title that is at least {count} characters long.]]></phrase>
+  <phrase title="zdess_please_enter_custom_title_that_is_at_most_x_characters_long" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter a custom title that is at most {count} characters long.]]></phrase>
+  <phrase title="zdess_rebuild_attachments" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Rebuild attachments]]></phrase>
+  <phrase title="zdess_rebuild_proxied_images" version_id="1000010" version_string="1.0.0"><![CDATA[ZDESS: Rebuild proxied images]]></phrase>
+  <phrase title="zdess_rebuilding_reaction_count" version_id="1000010" version_string="1.0.0"><![CDATA[Rebuilding reaction count]]></phrase>
+  <phrase title="zdess_received" version_id="1000010" version_string="1.0.0"><![CDATA[Received]]></phrase>
+  <phrase title="zdess_reset_reaction" version_id="1000010" version_string="1.0.0"><![CDATA[Reset reaction]]></phrase>
+  <phrase title="zdess_reset_reaction_confirm" version_id="1000010" version_string="1.0.0"><![CDATA[Confirm reset reaction]]></phrase>
+  <phrase title="zdess_reset_reaction_count_x" version_id="1000010" version_string="1.0.0"><![CDATA[Count of issued reactions: {count}]]></phrase>
+  <phrase title="zdess_reset_reaction_explain" version_id="1000010" version_string="1.0.0"><![CDATA[Reset this reaction for all users]]></phrase>
+  <phrase title="zdess_show_reg_date" version_id="1000010" version_string="1.0.0"><![CDATA[Show register date]]></phrase>
+  <phrase title="zdess_stick" version_id="1000010" version_string="1.0.0"><![CDATA[Stick]]></phrase>
+  <phrase title="zdess_super_user_group" version_id="1000010" version_string="1.0.0"><![CDATA[Super user group]]></phrase>
+  <phrase title="zdess_super_user_group_hint" version_id="1000010" version_string="1.0.0"><![CDATA[This group can only be given by an administrator with permission to edit user groups.]]></phrase>
+  <phrase title="zdess_unlock_forum" version_id="1000010" version_string="1.0.0"><![CDATA[Unlock forum]]></phrase>
+  <phrase title="zdess_unstick" version_id="1000010" version_string="1.0.0"><![CDATA[Unstick]]></phrase>
+  <phrase title="zdess_use_above_criteria_to_restrict_access_this_feature_to_certain_users" version_id="1000010" version_string="1.0.0"><![CDATA[Use the above criteria to restrict access to this feature to certain users.]]></phrase>
+  <phrase title="zdess_x_reactions" version_id="1000010" version_string="1.0.0" global_cache="1"><![CDATA[{name}'s reactions]]></phrase>
+</phrases>

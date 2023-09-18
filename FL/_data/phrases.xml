@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="con_acc.zdfl_vk" version_id="100010" version_string="1.0.0" global_cache="1"><![CDATA[VKontakte]]></phrase>
+  <phrase title="con_acc_desc.zdfl_vk" version_id="100010" version_string="1.0.0"><![CDATA[Instant authorization through VKontakte]]></phrase>
+</phrases>

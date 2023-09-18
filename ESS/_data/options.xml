@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="zdessAddReadOnlyUserGroup" edit_format="callback" data_type="integer" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params>XF\Option\UserGroup::renderSelect</edit_format_params>
+    <relation group_id="discourager" display_order="415"/>
+    <relation group_id="zdess" display_order="50"/>
+  </option>
+  <option option_id="zdessConvertingUploadedImages" edit_format="radio" data_type="string" advanced="1">
+    <default_value>default</default_value>
+    <edit_format_params>default={{ phrase('default') }}
+2=JPEG
+3=PNG</edit_format_params>
+    <relation group_id="attachments" display_order="200"/>
+    <relation group_id="zdess" display_order="2"/>
+  </option>
+  <option option_id="zdessCustomTitleLength" edit_format="template" data_type="array" validation_class="XF\Option\MinMax" validation_method="verifyOption" advanced="0">
+    <default_value>{"min":4,"max":32}</default_value>
+    <edit_format_params>template=option_template_minMax
+units={{ phrase('units_characters') }}
+max=50</edit_format_params>
+    <sub_options>min
+max</sub_options>
+    <relation group_id="users" display_order="575"/>
+    <relation group_id="zdess" display_order="10"/>
+  </option>
+  <option option_id="zdessCustomTitleRegex" edit_format="textbox" data_type="string" validation_class="ZD\ESS\Option\CustomTitleValidation" validation_method="verifyOption" advanced="1">
+    <default_value></default_value>
+    <relation group_id="users" display_order="576"/>
+    <relation group_id="zdess" display_order="20"/>
+  </option>
+  <option option_id="zdessDefaultAlertUser" edit_format="username" data_type="string" advanced="0">
+    <default_value></default_value>
+    <relation group_id="zdess" display_order="30"/>
+  </option>
+  <option option_id="zdessLoggingModeratorActions" edit_format="radio" data_type="string" advanced="1">
+    <default_value>default</default_value>
+    <edit_format_params>default={{ phrase('default') }}
+always_except_own_content={{ phrase('zdess_always_except_for_own_content') }}
+always={{ phrase('zdess_always') }}</edit_format_params>
+    <relation group_id="zdess" display_order="5"/>
+  </option>
+  <option option_id="zdessWarningsPerPage" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+    <default_value>30</default_value>
+    <relation group_id="zdess" display_order="3"/>
+  </option>
+</options>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="forum" permission_id="lockUnlockForum" permission_type="flag" interface_group_id="zdessForumModeratorPermissions" display_order="1"/>
+  <permission permission_group_id="forum" permission_id="lockUnlockOwnThread" permission_type="flag" interface_group_id="zdessForumPermissions" display_order="1"/>
+  <permission permission_group_id="forum" permission_id="postBehalf" permission_type="flag" interface_group_id="zdessForumPermissions" display_order="500"/>
+  <permission permission_group_id="forum" permission_id="viewForumModerators" permission_type="flag" interface_group_id="zdessForumPermissions" display_order="20"/>
+  <permission permission_group_id="general" permission_id="bypassCustomTitleLength" permission_type="flag" interface_group_id="zdessPermissions" display_order="90"/>
+  <permission permission_group_id="general" permission_id="bypassCustomTitleRegex" permission_type="flag" interface_group_id="zdessPermissions" display_order="100"/>
+  <permission permission_group_id="general" permission_id="bypassUsernameLength" permission_type="flag" interface_group_id="zdessPermissions" display_order="40"/>
+  <permission permission_group_id="general" permission_id="bypassUsernameRegex" permission_type="flag" interface_group_id="zdessPermissions" display_order="50"/>
+  <permission permission_group_id="general" permission_id="deleteAnyUsernameHistory" permission_type="flag" interface_group_id="zdessModeratorPermissions" display_order="60"/>
+  <permission permission_group_id="general" permission_id="deleteUsernameHistory" permission_type="flag" interface_group_id="zdessPermissions" display_order="120"/>
+  <permission permission_group_id="general" permission_id="hardDeleteUsernameHistory" permission_type="flag" interface_group_id="zdessModeratorPermissions" display_order="80"/>
+  <permission permission_group_id="general" permission_id="readOnlyUser" permission_type="flag" interface_group_id="zdessModeratorPermissions" display_order="100"/>
+  <permission permission_group_id="profilePost" permission_id="stickAnyProfilePost" permission_type="flag" interface_group_id="zdessProfilePostModeratorPermissions" display_order="1"/>
+  <permission permission_group_id="profilePost" permission_id="stickProfilePost" permission_type="flag" interface_group_id="zdessProfilePostPermissions" display_order="1"/>
+</permissions>

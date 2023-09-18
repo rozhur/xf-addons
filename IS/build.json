@@ -1,0 +1,15 @@
+{
+    "additional_files": [
+        "js/zd/is"
+    ],
+    "minify": [
+        "js/zd/is/vendor/sticky-kit/sticky-kit.js",
+        "js/zd/is/core.js"
+    ],
+    "rollup": {
+        "js/zd/is/core-compiled.js": [
+            "js/zd/is/vendor/sticky-kit/sticky-kit.min.js",
+            "js/zd/is/core.min.js"
+        ]
+    }
+}

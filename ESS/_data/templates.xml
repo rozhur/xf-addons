@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="zdess_reset_reaction_confirm" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('zdess_reset_reaction:') }} {$reaction.title}</xf:title>
+
+<xf:form action="{{ link('reactions/reset', $reaction) }}" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('zdess_reset_reaction_confirm:') }}
+				<strong><a href="{{ link('reactions/edit', $reaction) }}">{$reaction.title}</a></strong>
+				<span>{{ phrase('zdess_reset_reaction_count_x', {'count': $reactionsToResetCount}) }}</span>
+			</xf:inforow>
+		</div>
+		<xf:submitrow icon="confirm" rowtype="simple" />
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="alert_warning_insert" version_id="1000010" version_string="1.0.0"><![CDATA[{{ phrase('alert_warning_insert', {'url': $extra.warningLink, 'title': $extra.title}) }}
+<a href="{{ link('account/warnings') }}" class="fauxBlockLink-blockLink"></a>]]></template>
+  <template type="public" title="zdess_account_warnings" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('warnings') }}</xf:title>
+
+<xf:wrap template="account_wrapper" />
+
+<div class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:if is="$warnings is not empty">
+				<xf:datalist data-xf-init="responsive-data-list">
+					<xf:datarow rowtype="header">
+						<xf:cell>{{ phrase('warning') }}</xf:cell>
+						<xf:cell>{{ phrase('date') }}</xf:cell>
+						<xf:cell>{{ phrase('points') }}</xf:cell>
+						<xf:cell>{{ phrase('expiry') }}</xf:cell>
+					</xf:datarow>
+					<xf:foreach loop="$warnings" value="$warning">
+						<xf:datarow rowclass="{{ $warning.is_expired ? 'dataList-row--disabled' : '' }}">
+							<xf:cell href="{{ link('warnings', $warning) }}" overlay="true">{$warning.title}</xf:cell>
+							<xf:cell href="{{ link('warnings', $warning) }}" overlay="true"><xf:date time="{$warning.warning_date} " /></xf:cell>
+							<xf:cell href="{{ link('warnings', $warning) }}" overlay="true">{$warning.points|number}</xf:cell>
+							<xf:cell href="{{ link('warnings', $warning) }}" overlay="true">
+								<xf:if is="$warning.expiry_date">
+									<xf:date time="{$warning.expiry_date} " />
+									<xf:else />
+									{{ phrase('never') }}
+								</xf:if>
+							</xf:cell>
+						</xf:datarow>
+					</xf:foreach>
+				</xf:datalist>
+				<xf:else />
+				<div class="block-row">{{ phrase('no_items_to_display') }}</div>
+			</xf:if>
+		</div>
+		<div class="block-footer">
+			<ul class="listInline listInline--bullet">
+				<li>{{ phrase('warning_points:') }} {$xf.visitor.warning_points|number}</li>
+				<li>{{ phrase('total_warnings:') }} {$totalWarnings}</li>
+			</ul>
+		</div>
+	</div>
+
+	<xf:pagenav link="account/warnings" page="{$page}" perpage="{$perPage}" total="{$totalWarnings}"
+		wrapperclass="block-outer block-outer--after" />
+</div>]]></template>
+  <template type="public" title="zdess_core_avatar.less" version_id="1000010" version_string="1.0.0"><![CDATA[.avatar-wrapper
+{
+	position: relative;
+	display: inline-block;
+	vertical-align: bottom;
+	margin-bottom: .5em;
+
+	.avatar-online
+	{
+		position: absolute;
+
+		// center bottom position
+		left: 50%;
+		margin-left: -.615em;
+		bottom: -.5em;
+
+		&:before
+		{
+			.m-faBase();
+			.m-faContent(@fa-var-user-circle, .969em);
+			line-height: 1;
+			font-weight: bold;
+			color: rgb(127, 185, 0);
+			background: @xf-messageUserBlock--background-color;
+			border: @xf-messageUserBlock--background-color solid 2px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+	}
+}
+
+.message-avatar-wrapper .message-avatar-online.message-avatar-online--from-mobile, .avatar-online.avatar-online--from-mobile
+{
+	margin-left: -0.449em;
+	&:before
+	{
+		.m-faContent(@fa-var-mobile-alt, .63em);
+		border-radius: 20%;
+	}
+}]]></template>
+  <template type="public" title="zdess_core_list.less" version_id="1000010" version_string="1.0.0"><![CDATA[.listHeap
+{
+	&.listHeap--aligned
+	{
+		margin-top: 0;
+		
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 0 @xf-paddingLarge;
+		justify-content: center;
+		
+		& > li
+		{
+			text-align: center;
+		}
+		
+		@media (max-width: @xf-responsiveMedium)
+		{
+			& > li
+			{
+				margin-right: 0;
+			}
+			
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			& > li:not(:nth-child(-n+5))
+			{
+				display: none;
+			}
+			
+			.offCanvasMenu-content &
+			{
+				grid-template-columns: 1fr 1fr 1fr;
+
+				& > li
+				{
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
+
+.listHeap-title
+{
+	display: inline-block;
+	.m-overflowEllipsis();
+	max-width: (@avatar-s + (@xf-paddingLarge / 2));
+}]]></template>
+  <template type="public" title="zdess_delete_username_history" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('zdess_clear_username_history') }}</xf:title>
+
+<xf:form action="{{ link('members/username-history/delete', $user) }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">{{ phrase('zdess_clear_username_history_confirm') }}</xf:inforow>
+			<xf:if is="$xf.visitor.canHardDeleteUsernameHistory()">
+				<xf:radiorow name="hard_delete" value="0"
+							 label="{{ phrase('deletion_type') }}">
+
+					<xf:option value="0"
+							   label="{{ phrase('remove_from_public_view') }}">
+					</xf:option>
+
+					<xf:option value="1"
+							   label="{{ phrase('permanently_delete') }}"
+							   hint="{{ phrase('selecting_this_option_will_permanently_and_irreversibly_delete_item') }}" />
+				</xf:radiorow>
+			</xf:if>
+		</div>
+		<xf:submitrow icon="delete" />
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="zdess_forum_moderator_list" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('moderators') }}</xf:title>
+
+<xf:head option="noindex"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:breadcrumb href="{{ link('forums', $forum) }}">{$forum.title}</xf:breadcrumb>
+
+<div class="block">
+	<div class="block-container">
+		<xf:if is="$moderators">
+			<ol class="block-body">
+				<xf:foreach loop="$moderators" value="$moderator">
+					<li class="block-row block-row--separated">
+						<xf:set var="$extraData">
+							<xf:button href="{{ link('conversations/add', null, {'to': $moderator.User.username}) }}"
+									   class="button--link" overlay="true">
+								{{ phrase('start_conversation') }}
+							</xf:button>
+						</xf:set>
+						<xf:macro template="member_list_macros" name="item"
+								  arg-user="{$moderator.User}"
+								  arg-extraData="{$extraData}" />
+					</li>
+				</xf:foreach>
+			</ol>
+			<xf:else />
+			<div class="block-body block-row">{{ phrase('no_matching_users_were_found') }}</div>
+		</xf:if>
+	</div>
+</div>]]></template>
+  <template type="public" title="zdess_member_macros" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:macro name="list_heap_aligned_item" arg-user="!">
+	<div class="listHeap-avatar">
+		<div class="avatar-wrapper">
+			<xf:avatar user="$user" size="s" context="followers" />
+		</div>
+	</div>
+	<div class="listHeap-title">
+		<xf:username user="$user" rich="true" />
+	</div>
+</xf:macro>
+
+<xf:macro name="content_row" arg-user="!">
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<div class="avatar-wrapper">
+				<xf:avatar user="$user" size="xs" context="following" />
+			</div>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			<xf:username user="$user" rich="true" />
+			<div class="contentRow-minor">
+				<xf:usertitle user="$user" />
+			</div>
+		</div>
+	</div>
+</xf:macro>]]></template>
+  <template type="public" title="zdess_member_reactions" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:title>{{ phrase('zdess_x_reactions', {'name': $user.username}) }}</xf:title>
+
+<xf:macro template="zdess_reaction_macros" name="wrapped_reaction_list" 
+		  arg-user="{$user}" 
+		  arg-reactions="{$reactions}"
+		  arg-context="wide" />]]></template>
+  <template type="public" title="zdess_message.less" version_id="1000010" version_string="1.0.0"><![CDATA[.message-zdessThreadStarterIndicator,
+a.message-zdessThreadStarterIndicator
+{
+	.xf-zdessMessageThreadStarterIndicator();
+	white-space: nowrap;
+}
+
+<xf:if is="{{ property('zdessCenterOnlineIndicatorOnMediumResponsive') }}">
+@media (max-width: @xf-messageSingleColumnWidth)
+{
+	.message:not(.message--forceColumns) .message-avatar .avatar + .message-avatar-online
+	{
+		bottom: -10px;
+		left: 50%;
+		right: unset;
+	}
+}
+</xf:if>]]></template>
+  <template type="public" title="zdess_moderator_wrapper" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:macro name="sidenav" arg-pageSelected="">
+	<div class="block">
+		<div class="block-container">
+			<h1 class="block-header">{{ phrase('moderator_tools') }}</h1>
+			<div class="block-body">
+				<a href="{{ link('approval-queue') }}" class="blockLink{{ $pageSelected == 'approval_queue' ? ' is-selected ' : '' }} badgeContainer{{ $xf.session.unapprovedCounts.total ? ' badgeContainer--highlighted' : '' }}" 
+				   data-badge="{$xf.session.unapprovedCounts.total|number}">
+					{{ phrase('approval_queue') }}
+				</a>
+				<a href="{{ link('reports') }}" class="blockLink{{ $pageSelected == 'reports' ? ' is-selected' : '' }} badgeContainer{{ (!$xf.options.reportIntoForumId && $xf.session.reportCounts.total) ? (($xf.session.reportCounts.total && ($xf.session.reportCounts.lastBuilt > $xf.session.reportLastRead) OR $xf.session.reportCounts.assigned) ? ' badgeContainer--highlighted' : ' badgeContainer--visible') : '' }}" 
+				   data-badge="{{ $xf.session.reportCounts.assigned ? $xf.session.reportCounts.assigned|number . ' / ' . $xf.session.reportCounts.total|number : $xf.session.reportCounts.total|number }}"
+				   title="{{ $xf.session.reportCounts.lastBuilt ? phrase('last_report_update:')|for_attr . ' ' . date_time($xf.session.reportCounts.lastBuilt) : '' }}">
+					{{ phrase('reports') }}
+				</a>
+			</div>
+		</div>
+	</div>
+</xf:macro>
+
+<xf:sidenav>
+	<xf:macro name="sidenav" arg-pageSelected="{$pageSelected}" />
+</xf:sidenav>
+
+<xf:page option="sideNavTitle">{{ phrase('zdess_moderator_panel') }}</xf:page>
+
+{$innerContent|raw}]]></template>
+  <template type="public" title="zdess_reaction.less" version_id="1000010" version_string="1.0.0"><![CDATA[.zdessReactionScore-positive
+{
+	color: @xf-zdessPositiveReactionScoreColor;
+}
+
+.zdessReactionScore-negative
+{
+	color: @xf-zdessNegativeReactionScoreColor;
+}
+
+.dataList.dataList-reactions
+{
+	&.dataList-reactions--widget
+	{
+		.dataList-row .dataList-cell
+		{
+			&:first-child
+			{
+				padding-right:0;
+			}
+			
+			&:last-child
+			{
+				padding-left:0;
+			}
+			
+			&:not(:first-child):not(:last-child)
+			{
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+		
+		.dataList-row--header .dataList-cell
+		{
+			background: none;
+			color: @xf-textColorMuted;
+		}
+		
+		.dataList-row .dataList-cell
+		{
+			text-align: center;
+			border-bottom: none;
+		}
+		
+		.dataList-row:not(.dataList-row--header):not(:first-child) .dataList-cell
+		{
+			padding-top: (@xf-dataListPaddingV / 2);
+		}
+		
+		.dataList-row:not(.dataList-row--header):not(:last-child) .dataList-cell
+		{
+			padding-bottom: (@xf-dataListPaddingV / 2);
+		}
+	}
+}]]></template>
+  <template type="public" title="zdess_reaction_macros" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:macro name="reaction_score" arg-user="!">
+	<xf:if is="{{ property('zdessShowPositiveNegativeReactions') }}">
+		<xf:css src="zdess_reaction.less" />
+		(<span class="zdessReactionScore-positive">{$user.zdess_reaction_score_positive|number}</span> | <span class="zdessReactionScore-negative">{$user.zdess_reaction_score_negative|number}</span>)
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="reaction_list" arg-user="!" arg-context="!">
+	<xf:css src="zdess_reaction.less" />
+	<xf:datalist class="dataList-reactions dataList-reactions--{$context}">
+		<xf:datarow rowtype="header">
+			<xf:cell>&nbsp;</xf:cell>
+			<xf:cell>{{ phrase('zdess_received') }}</xf:cell>
+			<xf:cell>{{ phrase('zdess_given') }}</xf:cell>
+		</xf:datarow>
+		<xf:foreach loop="$user.reaction_count" value="$reaction">
+			<xf:datarow rowclass="dataList-row--noHover">
+				<xf:cell><xf:reaction id="{$reaction.Reaction}" /></xf:cell>
+				<xf:cell>{$reaction.received}</xf:cell>
+				<xf:cell>{$reaction.given}</xf:cell>
+			</xf:datarow>
+		</xf:foreach>
+	</xf:datalist>
+</xf:macro>
+
+<xf:macro name="wrapped_reaction_list" arg-user="!" arg-title="" arg-context="!">
+	<div class="block">
+		<div class="block-container">
+			<xf:if is="$title">
+				<h2 class="block-minorHeader">{$title}</h2>
+			</xf:if>
+			<div class="block-body">
+				<xf:macro name="reaction_list" arg-user="{$user}" arg-context="{$context}" />
+			</div>
+		</div>
+	</div>
+</xf:macro>]]></template>
+  <template type="public" title="zdess_widget_member_followers" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:if is="$followers is not empty">
+	<div class="block"{{ widget_data($widget) }}>
+		<div class="block-container">
+			<h3 class="block-minorHeader"><a href="{{ link('members/followers', $user) }}" data-xf-click="overlay">{$title}</a> <span class="u-muted">{$total}</span></h3>
+			<div class="block-body block-row">
+				<ul class="listHeap listHeap--aligned">
+					<xf:foreach loop="$followers" value="$userFollow">
+						<li>
+							<xf:macro template="zdess_member_macros" name="list_heap_aligned_item" arg-user="{$userFollow}" />
+						</li>
+					</xf:foreach>
+				</ul>
+			</div>
+		</div>
+	</div>
+</xf:if>]]></template>
+  <template type="public" title="zdess_widget_member_following" version_id="1000010" version_string="1.0.0"><![CDATA[<xf:if is="$following is not empty">
+	<div class="block"{{ widget_data($widget) }}>
+		<div class="block-container">
+			<h3 class="block-minorHeader"><a href="{{ link('members/following', $user) }}" data-xf-click="overlay">{$title}</a> <span class="u-muted">{$total}</span></h3>
+			<ul class="block-body">
+				<xf:foreach loop="$following" value="$userFollow">
+					<li class="block-row">
+						<xf:macro template="zdess_member_macros" name="content_row" arg-user="{$userFollow}" />
+					</li>
+				</xf:foreach>
+			</ul>
+		</div>
+	</div>
+</xf:if>]]></template>
+  <template type="public" title="zdess_widget_member_reactions" version_id="1000010" version_string="1.0.0"><![CDATA[<div class="block"{{ widget_data($widget) }}>
+	<div class="block-container">
+		<xf:if is="$title">
+			<h3 class="block-minorHeader">{$title}</h3>
+		</xf:if>
+		<div class="block-body">
+			<xf:macro template="zdess_reaction_macros" name="reaction_list" arg-user="{$user}" arg-context="widget" />
+		</div>
+	</div>
+</div>]]></template>
+</templates>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="zdessCenterOnlineIndicatorOnMediumResponsive" group_name="message" title="Center online indicator on medium responsive" property_type="value" value_type="boolean" value_group="user" display_order="700">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="zdessMessageThreadStarterIndicator" group_name="message" title="ZDESS: Message thread starter indicator" description="Usually a small token attached to the message block, the indicator that a message by thread starter is controlled here" property_type="css" display_order="20150" css_components="text,background,border,border_radius,padding,extra">
+    <value>{
+    "font-size": "90%",
+    "color": "contrast(@xf-successFeatureColor)",
+    "background-color": "@xf-successFeatureColor",
+    "border-radius": "@xf-borderRadiusSmall",
+    "padding-top": "1px",
+    "padding-right": "4px",
+    "padding-bottom": "1px",
+    "padding-left": "4px"
+}</value>
+  </style_property>
+  <style_property property_name="zdessNegativeReactionScoreColor" group_name="zdessBasic" title="Negative reaction score color" property_type="value" value_type="color" display_order="30">
+    <value>"@xf-errorColor"</value>
+  </style_property>
+  <style_property property_name="zdessPositiveReactionScoreColor" group_name="zdessBasic" title="Positive reaction score color" property_type="value" value_type="color" display_order="20">
+    <value>"@xf-successColor"</value>
+  </style_property>
+  <style_property property_name="zdessShowPositiveNegativeReactions" group_name="zdessBasic" title="Show positive / negative reactions" description="It will show next to the total reaction score in the format (positive / negative)." property_type="value" value_type="boolean" display_order="0">
+    <value>1</value>
+  </style_property>
+</style_properties>

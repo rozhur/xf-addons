@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="mod_log.thread_zdir_custom_link" version_id="1000010" version_string="1.0.0"><![CDATA[Custom link edited from '{old}']]></phrase>
+  <phrase title="option.zdirCustomLinkLength" version_id="1000010" version_string="1.0.0"><![CDATA[Custom link length validation]]></phrase>
+  <phrase title="option.zdirCustomLinkRegex" version_id="1000010" version_string="1.0.0"><![CDATA[Custom link regex validation]]></phrase>
+  <phrase title="option.zdirDisallowedCustomLinks" version_id="1000010" version_string="1.0.0"><![CDATA[Disallowed custom links]]></phrase>
+  <phrase title="option.zdirRedirectRouteErrorsToIndex" version_id="1000070" version_string="1.0.0"><![CDATA[Redirect route errors to index]]></phrase>
+  <phrase title="option_explain.zdirCustomLinkLength" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.zdirCustomLinkRegex" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.zdirDisallowedCustomLinks" version_id="1000010" version_string="1.0.0"><![CDATA[Enter the words or phrases that are disallowed in custom links. All censored words are automatically disallowed. Place each word or phrase on separate lines.]]></phrase>
+  <phrase title="option_explain.zdirRedirectRouteErrorsToIndex" version_id="1000070" version_string="1.0.0"><![CDATA[If the page returns 'do not have permission' and 'not found' errors, then the user will be redirected to the index page or index action (if possible). If debug mode is enabled, this option will not work.]]></phrase>
+  <phrase title="option_group.zdir" version_id="1000070" version_string="1.0.0"><![CDATA[ZDIR: Basic options]]></phrase>
+  <phrase title="option_group_description.zdir" version_id="1000010" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="permission.forum_editThreadCustomLink" version_id="1000070" version_string="1.0.0"><![CDATA[Edit custom links of own threads]]></phrase>
+  <phrase title="permission.general_bypassCustomLinkLength" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass custom link length validation]]></phrase>
+  <phrase title="permission.general_bypassCustomLinkRegex" version_id="1000010" version_string="1.0.0"><![CDATA[Bypass custom link regex validation]]></phrase>
+  <phrase title="permission.general_editCustomLink" version_id="1000010" version_string="1.0.0"><![CDATA[Edit custom link]]></phrase>
+  <phrase title="permission_interface.zdirForumPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDIR: Forum permissions]]></phrase>
+  <phrase title="permission_interface.zdirPermissions" version_id="1000010" version_string="1.0.0"><![CDATA[ZDIR: General permissions]]></phrase>
+  <phrase title="zdir_custom_link" version_id="100010" version_string="1.0.0"><![CDATA[Custom link]]></phrase>
+  <phrase title="zdir_custom_links_must_be_unique" version_id="1000010" version_string="1.0.0"><![CDATA[Custom links must be unique. This link is already taken.]]></phrase>
+  <phrase title="zdir_if_specified_serve_as_link_to_that_thread" version_id="1000070" version_string="1.0.0"><![CDATA[If specified, this will serve as a link to that thread. This thread is available at the link: {url}/{link}]]></phrase>
+  <phrase title="zdir_if_specified_serve_as_link_to_your_profile" version_id="1000070" version_string="1.0.0"><![CDATA[If specified, this will serve as a link to your profile. Your profile is available at the link: {url}/{link}.]]></phrase>
+  <phrase title="zdir_please_enter_another_custom_link_disallowed_words" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter another custom link. The entered value contains disallowed words.]]></phrase>
+  <phrase title="zdir_please_enter_another_custom_link_required_format" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter another custom link. The entered value does not match the required format.]]></phrase>
+  <phrase title="zdir_please_enter_custom_link_that_is_at_least_x_characters_long" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter a custom link that is at least {count} characters long.]]></phrase>
+  <phrase title="zdir_please_enter_custom_link_that_is_at_most_x_characters_long" version_id="1000010" version_string="1.0.0"><![CDATA[Please enter a custom link that is at most {count} characters long.]]></phrase>
+  <phrase title="zdir_rebuild_custom_links" version_id="1000010" version_string="1.0.0"><![CDATA[ZDIR: Rebuild custom links]]></phrase>
+</phrases>

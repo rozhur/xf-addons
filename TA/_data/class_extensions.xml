@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class_extensions>
+  <extension from_class="XFRM\Entity\ResourceItem" to_class="ZD\TA\XFRM\Entity\ResourceItem" execute_order="10" active="1"/>
+  <extension from_class="XFRM\Pub\Controller\ResourceItem" to_class="ZD\TA\XFRM\Pub\Controller\ResourceItem" execute_order="10" active="1"/>
+</class_extensions>

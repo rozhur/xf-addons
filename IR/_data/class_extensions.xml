@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class_extensions>
+  <extension from_class="XF\Admin\Controller\Login" to_class="ZD\IR\XF\Admin\Controller\Login" execute_order="10" active="1"/>
+  <extension from_class="XF\Admin\Controller\User" to_class="ZD\IR\XF\Admin\Controller\User" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Forum" to_class="ZD\IR\XF\Entity\Forum" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Node" to_class="ZD\IR\XF\Entity\Node" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Page" to_class="ZD\IR\XF\Entity\Page" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\RouteFilter" to_class="ZD\IR\XF\Entity\RouteFilter" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Thread" to_class="ZD\IR\XF\Entity\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\User" to_class="ZD\IR\XF\Entity\User" execute_order="10" active="1"/>
+  <extension from_class="XF\ModeratorLog\Thread" to_class="ZD\IR\XF\ModeratorLog\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Mvc\Dispatcher" to_class="ZD\IR\XF\Mvc\Dispatcher" execute_order="10" active="1"/>
+  <extension from_class="XF\Mvc\Router" to_class="ZD\IR\XF\Mvc\Router" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Account" to_class="ZD\IR\XF\Pub\Controller\Account" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Member" to_class="ZD\IR\XF\Pub\Controller\Member" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Thread" to_class="ZD\IR\XF\Pub\Controller\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\View\Member\Find" to_class="ZD\IR\XF\Pub\View\Member\Find" execute_order="10" active="1"/>
+  <extension from_class="XF\Str\MentionFormatter" to_class="ZD\IR\XF\Str\MentionFormatter" execute_order="10" active="1"/>
+  <extension from_class="XF\Template\Templater" to_class="ZD\IR\XF\Template\Templater" execute_order="10" active="1"/>
+</class_extensions>

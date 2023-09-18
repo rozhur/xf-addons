@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "[ZD] Essentials",
+    "description": "",
+    "version_id": 1000010,
+    "version_string": "1.0.0",
+    "dev": "",
+    "dev_url": "",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": [],
+    "require": {
+        "XF": [2000010, "XenForo 2.2.8+"]
+    },
+    "icon": ""
+}

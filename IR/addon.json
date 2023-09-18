@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "[ZD] Improved Routes",
+    "description": "Beautiful internal urls and custom links to profiles and threads.",
+    "version_id": 1000070,
+    "version_string": "1.0.0",
+    "dev": "ZhDev",
+    "dev_url": "https://zhdev.org",
+    "faq_url": "https://xf.zhdev.org/faq/xf-addon?id=zdir",
+    "support_url": "https://xf.zhdev.org/support/xf-addon?id=zdir",
+    "extra_urls": [],
+    "require": {
+        "XF": [2020070, "XenForo 2.2"]
+    },
+    "icon": "logo.png"
+}

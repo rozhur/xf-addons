@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="zdess_remove_board_title_for_authorized_users" description="Remove boardTitle from &lt;title /&gt; for authorized users" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:title formatter="%s | %s" fallback="{$xf.options.boardTitle}" page="{$pageNumber}" />]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.user_id">
+	<xf:title formatter="%s" fallback="{{ phrase('forums') }}" page="{$pageNumber}" />
+<xf:else />
+	<xf:title formatter="%s | %s" fallback="{$xf.options.boardTitle}{{ $template == 'forum_list' ? " | {{ phrase('forums') }}" : "" }}" page="{$pageNumber}" />
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="zdess_remove_navbar_for_banned_users" description="Remove navigation for banned users" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<xf:if is="property\('publicNavSticky'\) == 'primary'">.*?</xf:if>)(.*?)(<div class="p\-footer\-row">.*?)(<xf:if contentcheck="true">\n\s+<div class="p\-footer\-copyright">)#is]]></find>
+    <replace><![CDATA[<xf:if is="!$xf.visitor.is_banned">
+	$1
+</xf:if>
+$2
+<xf:if is="!$xf.visitor.is_banned">
+	$3
+</xf:if>
+$4]]></replace>
+  </modification>
+  <modification type="public" template="account_details" modification_key="zdess_add_custom_title_validation" description="Add custom title validation" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:textboxrow name="user[custom_title]"]]></find>
+    <replace><![CDATA[$0 validation-url="{{ link('members/validate-custom-title', $xf.visitor) }}"]]></replace>
+  </modification>
+  <modification type="public" template="account_privacy" modification_key="zdess_add_option_show_reg_date_to_account_privacy" description="Add option show reg date" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro template="helper_account" name="dob_privacy_row" />]]></find>
+    <replace><![CDATA[$0
+<xf:checkboxrow>
+	<xf:option value="1" name="option[zdess_show_reg_date]" checked="{$xf.visitor.Option.zdess_show_reg_date}"
+			   label="{{ phrase('zdess_show_reg_date') }}">
+	</xf:option>
+</xf:checkboxrow>]]></replace>
+  </modification>
+  <modification type="public" template="account_visitor_menu" modification_key="zdess_add_warnings_link_to_visitor_menu" description="Add 'Warnings' link" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<li><a href="{{ link('account/reactions') }}"]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.warning_points">
+	<li><a href="{{ link('account/warnings') }}" class="menu-linkRow">{{ phrase('warnings') }}</a></li>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="account_wrapper" modification_key="zdess_add_warnings_link" description="Add 'Warnings' link" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<a class="blockLink {{ $pageSelected == 'reactions']]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.warning_points">
+	<a class="blockLink {{ $pageSelected == 'zdess_account_warnings' ? 'is-selected' : '' }}" href="{{ link('account/warnings') }}">{{ phrase('warnings') }}</a>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="admin_edit" modification_key="zdess_add_permissions_available_choices" description="Add permissions available choices" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:options source="\$permissions" />.*?</xf:checkboxrow>#is]]></find>
+    <replace><![CDATA[$0
+
+<h2 class="block-formSectionHeader"><span class="block-formSectionHeader-aligner">{{ phrase('zdess_available_moderator_permissions') }}</span></h2>
+
+<xf:set var="$interfaceGroups" value="{$availableModeratorPermissions.interfaceGroups}" />
+<xf:set var="$globalPermissions" value="{$availableModeratorPermissions.globalPermissions}" />
+<xf:set var="$contentPermissions" value="{$availableModeratorPermissions.contentPermissions}" />
+<xf:set var="$existingValues" value="{$admin.zdess_available_moderator_permissions}" />
+<div id="piGroups">
+
+	<xf:checkboxrow>
+		<xf:option check-all="#piGroups" label="{{ phrase('select_all') }}" />
+	</xf:checkboxrow>
+	<xf:foreach loop="$interfaceGroups" key="$interfaceGroupId" value="$interfaceGroup">
+		<xf:if is="{$globalPermissions.{$interfaceGroupId}}">
+			<hr class="formRowSep" />
+
+			<xf:checkboxrow listclass="listColumns"
+							label="{$interfaceGroup.title}">
+				<xf:hint>
+					<xf:checkbox standalone="true">
+						<xf:option check-all="< .formRow" label="{{ phrase('select_all') }}" />
+					</xf:checkbox>
+				</xf:hint>
+				<xf:foreach loop="{$globalPermissions.{$interfaceGroupId}}" value="$permission">
+					<xf:option name="zdess_available_global_moderator_permissions[{$permission.permission_group_id}][{$permission.permission_id}]"
+							   value="true"
+							   selected="{{ $existingValues.{$permission.permission_group_id} AND $existingValues.{$permission.permission_group_id}.{$permission.permission_id} }}"
+							   label="{$permission.title}" />
+				</xf:foreach>
+			</xf:checkboxrow>
+		</xf:if>
+	</xf:foreach>
+
+	<xf:foreach loop="$interfaceGroups" key="$interfaceGroupId" value="$interfaceGroup">
+		<xf:if is="{$contentPermissions.{$interfaceGroupId}}">
+			<hr class="formRowSep" />
+
+			<xf:checkboxrow listclass="listColumns"
+							label="{$interfaceGroup.title}">
+				<xf:hint>
+					<xf:checkbox standalone="true">
+						<xf:option check-all="< .formRow" label="{{ phrase('select_all') }}" />
+					</xf:checkbox>
+				</xf:hint>
+				<xf:foreach loop="{$contentPermissions.{$interfaceGroupId}}" value="$permission">
+					<xf:option name="zdess_available_content_moderator_permissions[{$permission.permission_group_id}][{$permission.permission_id}]"
+							   value="true"
+							   selected="{{ $existingValues.{$permission.permission_group_id} AND $existingValues.{$permission.permission_group_id}.{$permission.permission_id} }}"
+							   label="{$permission.title}" />
+				</xf:foreach>
+			</xf:checkboxrow>
+		</xf:if>
+	</xf:foreach>
+</div>]]></replace>
+  </modification>
+  <modification type="admin" template="admin_navigation_edit" modification_key="zdess_add_option_to_for_super_admin" description="Add option to for super admin" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:option name="debug_only"]]></find>
+    <replace><![CDATA[<xf:option name="zdess_super_admins_only" selected="$navigation.zdess_super_admins_only">{{
+	phrase('zdess_display_this_navigation_for_super_admins_only') }}
+</xf:option>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="approval_queue" modification_key="zdess_add_moderator_panel_sidenav_to_approval_queu" description="Add moderator panel side nav" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[</xf:title>]]></find>
+    <replace><![CDATA[$0
+
+<xf:sidenav>
+	<xf:macro template="zdess_moderator_wrapper" name="sidenav" arg-pageSelected="approval_queue" />
+</xf:sidenav>]]></replace>
+  </modification>
+  <modification type="public" template="core_avatar.less" modification_key="zdess_add_core_avatar_less" description="Add zdess_core_avatar.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+{{ include('zdess_core_avatar.less') }}]]></replace>
+  </modification>
+  <modification type="public" template="core_list.less" modification_key="zdess_add_core_list_less" description="Add zdess_core_list.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+{{ include('public:zdess_core_list.less') }}]]></replace>
+  </modification>
+  <modification type="public" template="debug_macros" modification_key="zdess_add_link_to_template_in_debug" description="Add link to template in debug" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<xf:macro name="class_info" arg-controller="!" arg-action="!" arg-template="!">)(.*?)(</xf:macro>)#is]]></find>
+    <replace><![CDATA[$1
+<xf:if is="$xf.visitor.hasAdminPermission('style')">
+	<a data-xf-init="element-tooltip" data-click-hide="false"
+	   data-trigger="hover focus click"
+	   data-maintain="true"
+	   data-element=".classInfo"
+	   role="button" tabindex="0"><xf:fa icon="fa-cog" /></a>
+	<div class="classInfo" style="display: none">
+		<xf:set var="$type" value="app.defaultType" />
+		{$controller} :: {$action} &middot; <a href="{{ link_type('admin', 'templates/edit', null, {'title': $template, 'type': $xf.app.{$type}, 'style_id': $xf.style.style_id}) }}">{$template}</a>
+	</div> 
+	<xf:else />
+	$2
+</xf:if>
+$3]]></replace>
+  </modification>
+  <modification type="admin" template="forum_edit" modification_key="zdess_add_lock_unlock_button" description="Add 'Lock / unlock' button" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:hiddenval name="require_prefix" value="0" />\n\s+</xf:if>#is]]></find>
+    <replace><![CDATA[$0
+<xf:checkboxrow name="zdess_forum_open" value="{$forum.zdess_forum_open}">
+	<xf:option value="1"
+			   label="{{ phrase('unlocked') }}"
+			   hint="{{ phrase('zdess_if_selected_users_will_be_able_post_new_threads') }}" />
+</xf:checkboxrow>]]></replace>
+  </modification>
+  <modification type="admin" template="forum_edit" modification_key="zdess_add_permission_check_for_delete_forum_edit" description="Add permission check for delete" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:button href="{{ link('forums/delete', $node) }}" icon="delete" overlay="true" />]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.hasAdminPermission('zdessCreateDeleteForum')">
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="forum_post_thread" modification_key="zdess_add_behalf_users_select_to_post_thread" description="Add behalf users select" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$canEditTags">]]></find>
+    <replace><![CDATA[
+<xf:set var="$nodeId" value="{$forum.node_id}" />
+<xf:if is="$nodeId AND $xf.visitor.hasNodePermission($nodeId, 'postBehalf') AND $xf.visitor.available_behalf_users is not empty">
+	<xf:checkboxrow value="">
+		<xf:option label="{{ phrase('zdess_behalf_of') }}" selected="0">
+			<xf:select name="zdess_real_user_id">
+				<xf:foreach loop="$xf.visitor.available_behalf_users" key="$userId" value="$user">
+					<xf:option value="{$userId}">{$user.username}</xf:option>
+				</xf:foreach>
+			</xf:select>
+		</xf:option>
+	</xf:checkboxrow>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="forum_view" modification_key="zdess_add_lock_unlock_and_moderators_button" description="Add 'Lock / unlock' and 'Moderators' button" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#\{\{ phrase\('unwatch'\) \}\}<xf:else />\{\{ phrase\('watch'\) \}\}</xf:if>.*?</xf:if>?#is]]></find>
+    <replace><![CDATA[$0
+
+<xf:if contentcheck="true">
+	<div class="buttonGroup-buttonWrapper">
+		<xf:button class="button--link menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true" title="{{ phrase('more_options') }}">&#8226;&#8226;&#8226;</xf:button>
+		<div class="menu" data-menu="menu" aria-hidden="true">
+			<div class="menu-content">
+				<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+				<xf:contentcheck>
+					<!--[XF:forum_tools_menu:top]-->
+					<xf:if is="$xf.visitor.hasAdminPermission('node')">
+						<a href="{{ link_type('admin', 'forums/edit', $forum) }}" 
+						   class="menu-linkRow"
+						   target="_blank"
+						   data-menu-closer="true">{{ phrase('edit') }}</a>
+					</xf:if>
+					<xf:if is="$forum.canLockUnlock()">
+						<a href="{{ link('forums/quick-close', $forum) }}" 
+						   class="menu-linkRow"
+						   data-xf-click="switch"
+						   data-menu-closer="true">{{ $forum.zdess_forum_open ? phrase('zdess_lock_forum') : phrase('zdess_unlock_forum') }}</a>
+					</xf:if>
+					<xf:if is="$moderators is not empty">
+						<a href="{{ link('forums/moderators', $forum) }}" 
+						   class="menu-linkRow"
+						   data-xf-click="overlay">{{ phrase('moderators') }}</a>
+					</xf:if>
+					<!--[XF:forum_tools_menu:bottom]-->
+				</xf:contentcheck>
+			</div>
+		</div>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="helper_criteria" modification_key="zdess_add_locked_criteria" description="Add 'Locked' criteria" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#only_display_within_selected_nodes_no_children'\) \}\}" />.*?</xf:checkbox>#is]]></find>
+    <replace><![CDATA[$0
+
+<xf:radio name="page_criteria[nodes][data][zdess_forum_status]" value="{{ $criteria.nodes.zdess_forum_status ? $criteria.nodes.zdess_forum_status : 0 }}">
+	<xf:option value="0"
+			   label="{{ phrase('zdess_display_within_all_selected_forums') }}" />
+	<xf:option value="1"
+			   label="{{ phrase('zdess_only_display_within_locked_forums') }}" />
+	<xf:option value="2"
+			   label="{{ phrase('zdess_only_display_within_unlocked_forums') }}" />
+</xf:radio>]]></replace>
+  </modification>
+  <modification type="admin" template="helper_node_delete_children" modification_key="zdess_add_permission_check_for_delete_children" description="Add permission check for delete" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[is="$node.hasChildren()]]></find>
+    <replace><![CDATA[$0 AND $xf.visitor.hasAdminPermission('zdessCreateDeleteForum')]]></replace>
+  </modification>
+  <modification type="public" template="helper_thread_options" modification_key="zdess_add_disallow_open_discussion_option" description="Add 'disallow open discussion' option" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$thread.canStickUnstick()">]]></find>
+    <replace><![CDATA[<xf:if is="$thread.canLockUnlockAny()">
+	<xf:option name="zdess_disallow_open_discussion" value="1" selected="{$thread.zdess_disallow_open_discussion}"
+			   label="{{ phrase('zdess_disallow_lock_unlock') }}"
+			   hint="{{ phrase('zdess_disallow_lock_unlock_hint') }}">
+
+		<xf:afterhtml>
+			<xf:hiddenval name="_xfSet[zdess_disallow_open_discussion]" value="1" />
+		</xf:afterhtml>
+	</xf:option>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="helper_user_search_criteria" modification_key="zdess_add_reaction_search_criteria" description="Add reaction search criteria" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:formrow rowtype="input"
+	label="{{ phrase('reaction_score_between') }}">
+	<div class="inputGroup">
+		<xf:numberbox name="criteria[reaction_score][start]" value="{$criteria.reaction_score.start}"
+			readonly="{$readOnly}"/>
+		<span class="inputGroup-text">-</span>
+		<xf:numberbox name="criteria[reaction_score][end]" value="{$criteria.reaction_score.end}"
+			readonly="{$readOnly}"/>
+	</div>
+</xf:formrow>]]></find>
+    <replace><![CDATA[$0
+
+<xf:checkboxrow name="criteria[zdess_reactions]"
+				label="{{ phrase('reactions') }}" 
+				explain="{{ phrase('use_negative_one_specify_no_max') }}">
+	<xf:foreach loop="$reactions" value="$reaction">
+		<xf:option value="{$reaction.reaction_id}" 
+				   label="{$reaction.title}" 
+				   checked="0" 
+				   readonly="{$readOnly}">
+			<xf:dependent>
+				<div class="inputGroup">
+					<xf:numberbox name="criteria[zdess_reactions][{$reaction.reaction_id}][start]" readonly="{$readOnly}" value="0" min="0" />
+					<span class="inputGroup-text">-</span>
+					<xf:numberbox name="criteria[zdess_reactions][{$reaction.reaction_id}][end]" readonly="{$readOnly}" value="-1" min="-1" />
+				</div>
+			</xf:dependent>
+		</xf:option>
+	</xf:foreach>
+</xf:checkboxrow>]]></replace>
+  </modification>
+  <modification type="admin" template="index" modification_key="zdess_add_permission_check_for_env_report" description="Add permission check for env report" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$envReport]]></find>
+    <replace><![CDATA[$0 AND $xf.visitor.hasAdminPermission('zdessDevelopment')]]></replace>
+  </modification>
+  <modification type="admin" template="index" modification_key="zdess_add_permission_check_for_error_logs" description="Add permission check for error logs" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[$xf.visitor.hasAdminPermission('viewLogs') && $serverErrorLogs]]></find>
+    <replace><![CDATA[$xf.visitor.hasAdminPermission('zdessViewErrorLogs') && $serverErrorLogs]]></replace>
+  </modification>
+  <modification type="public" template="inline_mod_post_copy" modification_key="zdess_add_permission_check_for_inline_post_copy" description="Add permission check for inline mod post copy" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[disabled="{{]]></find>
+    <replace><![CDATA[$0 !$xf.visitor.hasNodePermission($treeEntry.record.node_id, 'manageAnyThread') OR]]></replace>
+  </modification>
+  <modification type="public" template="inline_mod_post_move" modification_key="zdess_add_permission_check_for_inline_post_mode" description="Add permission check for inline mod post move" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[disabled="{{]]></find>
+    <replace><![CDATA[$0 !$xf.visitor.hasNodePermission($treeEntry.record.node_id, 'manageAnyThread') OR]]></replace>
+  </modification>
+  <modification type="public" template="inline_mod_thread_move" modification_key="zdess_add_permission_check_for_inline_thread_move" description="Add permission check for inline mod thread move" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[disabled="{{]]></find>
+    <replace><![CDATA[$0 !$xf.visitor.hasNodePermission($treeEntry.record.node_id, 'manageAnyThread') OR]]></replace>
+  </modification>
+  <modification type="public" template="member_about" modification_key="zdess_remove_following_and_followers_sections" description="Remove following and followers sections" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:if is="\$follow(ing|ers)Count">.*?</xf:if>\n\s+</div>\n\s+</xf:if>\n\s+</xf:if>#is]]></find>
+    <replace><![CDATA[]]></replace>
+  </modification>
+  <modification type="public" template="member_list_macros" modification_key="zdess_add_followers_count_in_list" description="Add followers count in list" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:stats:after_solutions]-->]]></find>
+    <replace><![CDATA[<xf:if is="$user.followers.total">
+	<li><dl class="pairs pairs--inline">
+		<dt>{{ phrase('followers') }}</dt>
+		<dd>{$user.followers.total|number}</dd>
+		</dl></li>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="member_macros" modification_key="zdess_add_followers_count_in_stats" description="Add followers count in stats" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:stat_pairs:above_reactions]-->]]></find>
+    <replace><![CDATA[<xf:if is="$user.followers.total">
+	<dl class="pairs pairs--rows pairs--rows--centered">
+		<dt>{{ phrase('followers') }}</dt>
+		<dd>
+			<a href="{{ link('members/followers', $user) }}" data-xf-click="overlay" class="fauxBlockLink-linkRow u-concealed">
+				{$user.followers.total|number}
+			</a>
+		</dd>
+	</dl>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="member_macros" modification_key="zdess_add_positive_negative_reaction_score" description="Add positive / negative reaction score" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[{$user.reaction_score|number}]]></find>
+    <replace><![CDATA[<a href="{{ link('members/reactions', $user) }}" data-xf-click="overlay" class="fauxBlockLink-linkRow u-concealed">$0
+	<xf:macro template="zdess_reaction_macros" name="reaction_score" arg-user="{$user}" />
+</a>]]></replace>
+  </modification>
+  <modification type="public" template="member_macros" modification_key="zdess_remove_a_tag_if_no_permission_to_action" description="Remove &lt;a&gt; tag if no permission to action" execution_order="20" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<dd>\n\s+|<dd>)(<a.*?class=".*?u\-concealed">)(.*?)(</a>)#is]]></find>
+    <replace><![CDATA[$1
+<xf:if is="$user.canViewFullProfile()">
+	$2$3$4
+	<xf:else />
+	$3
+</xf:if>
+
+]]></replace>
+  </modification>
+  <modification type="public" template="member_macros" modification_key="zdess_remove_a_tag_if_no_permission_to_search" description="Remove &lt;a&gt; tag if no permission to search" execution_order="15" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<dd>\n\s+)<a href="{{ link\('search/member'.*?</a>#is]]></find>
+    <replace><![CDATA[$1
+<xf:if is="$xf.visitor.canSearch()">
+	<a href="{{ link('search/member', null, {'user_id': $user.user_id}) }}" class="fauxBlockLink-linkRow u-concealed">
+		{$user.message_count|number}
+	</a>
+	<xf:else />
+	{$user.message_count|number}
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_tooltip" modification_key="zdess_add_reg_date_view_check" description="Add reg date view check" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<div class="memberTooltip-blurb">\n\s+<dl class=".*?">\n\s+<dt>{{ phrase\('joined'\) }}</dt>\n\s+<dd><xf:date time="\$user\.register_date" /></dd>\n\s+</dl>\n\s+</div>#is]]></find>
+    <replace><![CDATA[<xf:if is="$user.canViewRegisterDate()">
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_username_history_menu" modification_key="zdess_modify_username_history_menu" description="Modify username history menu" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[	<xf:if is="$seeMore">
+		<div class="menu-footer menu-footer--split">
+			<div class="menu-footer-main">
+				<ul class="listInline listInline--bullet">
+					<li><a href="{{ link('members/username-history', $user) }}" data-xf-click="overlay" data-menu-closer="true">{{ phrase('see_more') }}</a></li>
+				</ul>
+			</div>
+		</div>
+	</xf:if>]]></find>
+    <replace><![CDATA[<xf:if contentcheck="true">
+	<div class="menu-footer menu-footer--split">
+		<div class="menu-footer-main">
+			<ul class="listInline listInline--bullet">
+				<xf:contentcheck>
+					<xf:if is="$seeMore">
+						<li><a href="{{ link('members/username-history', $user) }}" data-xf-click="overlay" data-menu-closer="true">{{ phrase('see_more') }}</a></li>
+					</xf:if>
+					<xf:if is="$user.canDeleteUsernameHistory()">
+						<li><a href="{{ link('members/username-history/delete', $user) }}" data-xf-click="overlay" data-menu-closer="true">{{ phrase('clear') }}</a></li>
+					</xf:if>
+				</xf:contentcheck>
+			</ul>
+		</div>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="zdess_add_check_can_view_reg_date_member_view" description="Add check can view reg date" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<div class="memberHeader-blurb">\n\s+<dl class=".*?">\n\s+<dt>{{ phrase\('joined'\) }}</dt>\n\s+<dd><xf:date time="\$user\.register_date" /></dd>\n\s+</dl>\n\s+</div>#is]]></find>
+    <replace><![CDATA[<xf:if is="$user.canViewRegisterDate()">
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="zdess_add_check_to_view_full_profile" description="Add a check to view the full profile" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<h2 class="block-tabHeader.*?</h2>)(.*?)(<ul class="tabPanes.*?\-\->\n</ul>)#is]]></find>
+    <replace><![CDATA[<xf:if is="!$noView">
+	$1
+</xf:if>
+$2
+<xf:if is="!$noView">
+	$3
+	<xf:else />
+	<div class="block">
+		<div class="block-container">
+			<div class="block-body">
+				<div class="block-row">{$noViewErrorPhrase}</div>
+			</div>
+		</div>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="zdess_add_moderated_forums_pair" description="Add moderated forums pair" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#last_seen.*?</xf:if>#is]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="$moderatedForums is not empty">
+	<div class="memberHeader-blurb">
+		<dl class="pairs pairs--inline">
+			<dt>{{ phrase('zdess_moderated_forums') }}</dt>
+			<dd>
+				<xf:foreach loop="$moderatedForums" i="$i" value="$moderatedForum"><xf:if is="$i > 1">, </xf:if><a href="{$moderatedForum.link}">{$moderatedForum.title}</a></xf:foreach>
+			</dd>
+		</dl>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="zdess_add_sticky_post" description="Add sticky post" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:if is="\$profilePosts is not empty">\n\s+<xf:foreach loop="\$profilePosts" value="\$profilePost">(.*?</xf:if>)#s]]></find>
+    <replace><![CDATA[<xf:if is="$stickyProfilePost">
+	<xf:macro template="profile_post_macros"
+			  name="profile_post"
+			  arg-attachmentData="{$profilePostAttachData.{$stickyProfilePost.profile_post_id}}"
+			  arg-profilePost="{$stickyProfilePost}" />
+</xf:if>
+
+<xf:if is="$profilePosts is not empty">
+	<xf:foreach loop="$profilePosts" value="$profilePost" if="!$stickyProfilePost OR $stickyProfilePost.profile_post_id != $profilePost.profile_post_id">
+	$1]]></replace>
+  </modification>
+  <modification type="public" template="member_warn" modification_key="zdess_add_send_alert_notification" description="Add 'send alert' notification" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:option name="start_conversation" value="1"]]></find>
+    <replace><![CDATA[<xf:option name="zdess_alert" value="1" 
+		   selected="1"
+		   label="{{ phrase('zdess_notify_x', {'name': $user.username}) }}" />
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="message.less" modification_key="zdess_add_zdess_message_less" description="Add zdess_message.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+{{ include('zdess_message.less') }}]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdess_add_check_can_view_reg_date" description="Add check can view reg date" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$extras.register_date">]]></find>
+    <replace><![CDATA[<xf:if is="$extras.register_date AND $user.canViewRegisterDate()">]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdess_add_context_to_display_online_indicator" description="Add context to display online indicator" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:avatar user="$user"]]></find>
+    <replace><![CDATA[$0 context="message" ]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdess_add_positive_negative_reaction_score_extra" description="Add positive / negative reaction score" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[{$user.reaction_score|number}]]></find>
+    <replace><![CDATA[$0
+
+<xf:macro template="zdess_reaction_macros" name="reaction_score" arg-user="{$user}" />]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdess_remove_online_status_from_template" description="Remove online status from template" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[				<xf:if is="$xf.options.showMessageOnlineStatus && $user && $user.isOnline()">
+					<span class="message-avatar-online" tabindex="0" data-xf-init="tooltip" data-trigger="auto" title="{{ phrase('online_now')|for_attr }}"></span>
+				</xf:if>]]></find>
+    <replace><![CDATA[]]></replace>
+  </modification>
+  <modification type="admin" template="node_add" modification_key="zdess_add_permission_check_for_add_node_add" description="Add permission check for add" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<div class="js-forumTypes">.*?</div>#is]]></find>
+    <replace><![CDATA[<xf:if is="$nodeTypes.Forum">
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="node_list" modification_key="zdess_add_permission_check_for_delete_node_list" description="Add permission check for delete" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:delete href="{{ link('nodes/delete', $node) }}" />]]></find>
+    <replace><![CDATA[<xf:if is="$node.node_type_id !== 'Forum' OR $xf.visitor.hasAdminPermission('zdessCreateDeleteForum')">
+	$0
+	<xf:else />
+	<xf:cell class="dataList-cell--min dataList-cell--alt" />
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="option_template_registrationDefaults" modification_key="zdess_add_option_show_reg_date" description="Add option to show reg date" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:option name="{$inputName}[receive_admin_email]"]]></find>
+    <replace><![CDATA[<xf:option name="{$inputName}[zdess_show_reg_date]" selected="$option.option_value.zdess_show_reg_date">{{ phrase('zdess_show_reg_date') }}</xf:option>
+$0]]></replace>
+  </modification>
+  <modification type="public" template="post_edit" modification_key="zdess_add_behalf_users_select_to_post_edit" description="Add behalf users select" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$post.canEditSilently()">]]></find>
+    <replace><![CDATA[<xf:set var="$nodeId" value="{$post.Thread.node_id}" />
+<xf:if is="$nodeId AND $xf.visitor.hasNodePermission($nodeId, 'postBehalf') AND $xf.visitor.available_behalf_users is not empty">
+	<xf:checkboxrow rowtype="{{ $quickEdit ? 'fullWidth noLabel' : '' }}"
+					value="">
+		<xf:option label="{{ phrase('zdess_behalf_of') }}" selected="{$post.zdess_real_user_id}">
+			<xf:select name="zdess_real_user_id" value="{$post.user_id}">
+				<xf:foreach loop="$xf.visitor.available_behalf_users" key="$userId" value="$user">
+					<xf:option value="{$userId}">{$user.username}</xf:option>
+				</xf:foreach>
+			</xf:select>
+		</xf:option>
+	</xf:checkboxrow>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="post_macros" modification_key="zdess_add_show_real_user" description="Add show real user" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[#<a href="{{ link\('threads/post', \$thread, {'post_id': \$post.post_id}\) }}" rel="nofollow">.*?<xf:date time="{\$post.post_date}" itemprop="datePublished" />.*?</a>#is]]></find>
+    <replace><![CDATA[<xf:if is="$post.zdess_real_user_id AND $post.canViewRealUser()">
+	<a href="{{ link('threads/post', $thread, {'post_id': $post.post_id}) }}" rel="nofollow"
+	   data-xf-init="element-tooltip"
+	   data-element="< li | .message-realUserTooltip"
+	   data-maintain="true"
+	   data-no-touch="false"
+	   data-trigger="hover focus touchclick">
+		<xf:date time="{$post.post_date}" itemprop="datePublished" />
+	</a>
+	<div class="message-realUserTooltip" style="display: none">
+		{{ phrase('posted_by:') }} {{ username_link($post.RealUser) }}
+	</div>
+	<xf:else />
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="post_macros" modification_key="zdess_add_topic_starter_label" description="Add topic starter label" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<ul class="message-attribution-opposite message-attribution-opposite--list {$oppositeClass}">]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="$post.user_id == $post.Thread.user_id">
+	<li><span class="message-zdessThreadStarterIndicator">{{ phrase('thread_starter') }}</span></li>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="post_macros" modification_key="zdess_add_username_who_edited_post" description="Add username who edited post" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[{{ phrase('last_edited_by_moderator:') }}]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.is_moderator AND $post.canEdit()">
+	{{ phrase('zdess_last_edited_by_x:', {'name': username_link($post.LastEditUser, false, {'class': 'u-concealed'})}) }}
+	<xf:else />
+	$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="profile_post_macros" modification_key="zdess_add_stick_action" description="Add stick / unstick action" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:if is="\$profilePost\.canEdit\(\)">.*?<xf:js src="xf/message\.js" min="1" />#is]]></find>
+    <replace><![CDATA[<xf:if is="$profilePost.message_state != 'deleted' && $profilePost.canStickUnstick()">
+	<a href="{{ link('profile-posts/quick-stick', $profilePost) }}"
+	   class="actionBar-action actionBar-action--stick{{ $profilePost.zdess_sticky ? ' is-sticky' : '' }} actionBar-action--menuItem"
+	   data-xf-click="zdess-quick-stick-profile-post">{{ $profilePost.zdess_sticky ? phrase('zdess_unstick') : phrase('zdess_stick') }}</a>
+	<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+</xf:if>
+
+$0
+<xf:js src="zd/ess/message.js" min="true" />]]></replace>
+  </modification>
+  <modification type="public" template="profile_post_macros" modification_key="zdess_add_sticky_class_and_icon" description="Add sticky class and icon" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<article class="message message--simple)(.*?<ul class="listInline.*?date" /></a></li>)#s]]></find>
+    <replace><![CDATA[$1{{ $profilePost.zdess_sticky ? ' message--sticky' : '' }}$2
+<xf:if is="$profilePost.zdess_sticky">
+	<li><xf:fa icon="fa-thumbtack" 
+			   data-xf-init="tooltip" 
+			   data-original-title="{{ phrase('sticky') }}" /></li>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="quick_reply_macros" modification_key="zdess_add_behalf_users_select_to_quick_reply" description="Add behalf users select" execution_order="15" enabled="1" action="str_replace">
+    <find><![CDATA[<div class="formButtonGroup-primary">]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="$nodeId AND $xf.visitor.hasNodePermission($nodeId, 'postBehalf') AND $xf.visitor.available_behalf_users is not empty">
+	<div style="display: inline-block; margin-right: {{ property('paddingMedium') }}">
+		<xf:select style="display: block; padding-top: {{ property('buttonBase--padding-top') }}; padding-bottom: {{ property('buttonBase--padding-bottom') }}; font-size: {{ property('buttonBase--font-size') }}"
+				   name="zdess_real_user_id"
+				   value="">
+			<xf:option value="{$xf.visitor.user_id}">{{ phrase('zdess_behalf_of...') }}</xf:option>
+			<xf:foreach loop="$xf.visitor.available_behalf_users" key="$userId" value="$user">
+				<xf:option value="{$userId}">{$user.username}</xf:option>
+			</xf:foreach>
+		</xf:select>
+	</div>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="quick_reply_macros" modification_key="zdess_add_node_id_arg_to_macros" description="Add node id arg to macros" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[#(arg-message="")(.*?arg-message="{\$message}")(.*?arg-message="")(.*?)#is]]></find>
+    <replace><![CDATA[$1
+arg-nodeId="0"
+$2
+arg-nodeId="{$nodeId}"
+$3
+arg-nodeId="0"
+$4]]></replace>
+  </modification>
+  <modification type="admin" template="reaction_edit" modification_key="zdess_add_user_criteria_to_reaction_edit" description="Add user criteria to reaction_edit" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<div class="block\-container">)\n\s+<div class="block-body">(.*?dir="ltr" />)\n\s+</div>(.*?</div>\n</xf:form>)#s]]></find>
+    <replace><![CDATA[$1
+<h2 class="block-tabHeader tabs hScroller" data-xf-init="tabs h-scroller" role="tablist">
+	<span class="hScroller-scroll">
+		<a class="tabs-tab is-active" role="tab" tabindex="0" aria-controls="reaction-options">{{ phrase('options') }}</a>
+		<xf:if is="!$reaction.isDefaultReaction()">
+			<xf:macro template="helper_criteria" name="user_tabs" />
+		</xf:if>
+	</span>
+</h2>
+<ul class="tabPanes block-body">
+	<li class="is-active" role="tabpanel" id="reaction-options">
+		$2
+	</li>
+	<xf:if is="!$reaction.isDefaultReaction()">
+		<xf:macro template="helper_criteria" name="user_panes"
+				  arg-criteria="{{ $userCriteria.getCriteriaForTemplate() }}"
+				  arg-data="{{ $userCriteria.getExtraTemplateData() }}" />
+	</xf:if>
+</ul>
+$3]]></replace>
+  </modification>
+  <modification type="admin" template="reaction_list" modification_key="zdess_add_reset_reactions_button" description="Add reset reactions button" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$reaction.canDelete()">]]></find>
+    <replace><![CDATA[<xf:cell class="dataList-cell--action">
+	<a data-xf-init="tooltip"
+	   title="{{ phrase('zdess_reset_reaction_explain') }}"
+	   href="{{ link('reactions/reset', $reaction) }}"
+	   data-xf-click="overlay">{{ phrase('reset') }}</a></xf:cell>
+$0]]></replace>
+  </modification>
+  <modification type="public" template="report_list" modification_key="zdess_add_moderator_panel_sidenav_to_report_list" description="Add moderator panel side nav" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[</xf:title>]]></find>
+    <replace><![CDATA[$0
+
+<xf:sidenav>
+	<xf:macro template="zdess_moderator_wrapper" name="sidenav" arg-pageSelected="reports" />
+</xf:sidenav>]]></replace>
+  </modification>
+  <modification type="public" template="report_list_closed" modification_key="zdess_add_moderator_panel_sidenav_to_report_list_c" description="Add moderator panel side nav" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[</xf:title>]]></find>
+    <replace><![CDATA[$0
+
+<xf:sidenav>
+	<xf:macro template="zdess_moderator_wrapper" name="sidenav" arg-pageSelected="reports" />
+</xf:sidenav>]]></replace>
+  </modification>
+  <modification type="public" template="report_view" modification_key="zdess_add_moderator_panel_sidenav_to_report_view" description="Add moderator panel side nav" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[</xf:title>]]></find>
+    <replace><![CDATA[$0
+
+<xf:sidenav>
+	<xf:macro template="zdess_moderator_wrapper" name="sidenav" arg-pageSelected="reports" />
+</xf:sidenav>]]></replace>
+  </modification>
+  <modification type="admin" template="template_modification_edit" modification_key="zdess_add_save_and_exit_button" description="Add &quot;Save and exit&quot; button" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[icon="save"><xf:html>]]></find>
+    <replace><![CDATA[class="js-submitButton" data-ajax-redirect="{{ $modification.isInsert() ? '1' : '0' }}" $0 <xf:button type="submit" name="exit" icon="save">{{ phrase('save_and_exit') }}</xf:button>]]></replace>
+  </modification>
+  <modification type="public" template="thread_move" modification_key="zdess_add_permission_check_for_thread_move" description="Add permission check for thread move" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[disabled="{{]]></find>
+    <replace><![CDATA[$0 !$xf.visitor.hasNodePermission($treeEntry.record.node_id, 'manageAnyThread') OR]]></replace>
+  </modification>
+  <modification type="public" template="thread_view" modification_key="zdess_pass_node_id_arg_to_macros" description="Pass node id arg to macros" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[arg-message="{$thread.draft_reply.message}"]]></find>
+    <replace><![CDATA[$0
+arg-nodeId="{$thread.node_id}"]]></replace>
+  </modification>
+  <modification type="admin" template="tools_rebuild" modification_key="zdess_add_rebuild_attachments_tool" description="Add rebuild attachments tool" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:rebuild_bottom]-->]]></find>
+    <replace><![CDATA[<xf:macro name="rebuild_job"
+	arg-header="{{ phrase('zdess_rebuild_attachments') }}"
+	arg-job="ZD\ESS:AttachmentRebuild" />
+
+<xf:macro name="rebuild_job"
+	arg-header="{{ phrase('zdess_rebuild_proxied_images') }}"
+	arg-job="ZD\ESS:ImageProxyRebuild" />
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdess_add_behalf_criteria" description="Add behalf criteria" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:checkboxrow>\n\s+<xf:option name="option\[is_discouraged\]"#is]]></find>
+    <replace><![CDATA[<xf:checkboxrow label="{{ phrase('zdess_behalf_criteria') }}"
+				explain="{{ phrase('zdess_use_above_criteria_to_restrict_access_this_feature_to_certain_users') }}">
+	<xf:option selected="{$user.zdess_behalf_criteria.user_groups}"
+			   label="{{ phrase('user_is_member_of_any_of_selected_user_groups:') }}">
+		<xf:select name="user[zdess_behalf_criteria][user_groups]" size="4" multiple="true" value="{$user.zdess_behalf_criteria.user_groups}">
+			<xf:foreach loop="$userGroups" key="$userGroupId" value="$userGroupTitle">
+				<xf:option value="{$userGroupId}">{$userGroupTitle}</xf:option>
+			</xf:foreach>
+		</xf:select>
+	</xf:option>
+
+	<xf:option selected="{$user.zdess_behalf_criteria.not_user_groups}"
+			   label="{{ phrase('user_is_not_member_of_any_of_selected_user_groups:') }}">
+
+		<xf:select name="user[zdess_behalf_criteria][not_user_groups]" size="4" multiple="true" value="{$user.zdess_behalf_criteria.not_user_groups}">
+			<xf:foreach loop="$userGroups" key="$userGroupId" value="$userGroupTitle">
+				<xf:option value="{$userGroupId}">{$userGroupTitle}</xf:option>
+			</xf:foreach>
+		</xf:select>
+	</xf:option>
+</xf:checkboxrow>
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdess_add_option_show_reg_date_to_user_edit" description="Add option to show reg date to user_edit" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:option name="option\[show_dob_date\]".*?</xf:dependent>\n\s+</xf:option>#s]]></find>
+    <replace><![CDATA[$0
+<xf:option name="option[zdess_show_reg_date]" selected="$user.Option.zdess_show_reg_date">
+	<xf:label>{{ phrase('zdess_show_reg_date') }}</xf:label>
+</xf:option>]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdess_add_permission_check_for_primary_group" description="Add permission check for primary group" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:selectrow name="user\[user_group_id\]".*?</xf:selectrow>#is]]></find>
+    <replace><![CDATA[<xf:if is="!empty({$userGroups.{$user.user_group_id}})">
+$0
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdess_fix_link_to_moderator" description="Fix link to moderator" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[link('moderators')]]></find>
+    <replace><![CDATA[$user.is_super_moderator ? link('moderators/super/edit', $user) : link('moderators')]]></replace>
+  </modification>
+  <modification type="admin" template="user_group_edit" modification_key="zdess_add_option_banner_grouping_and_super_group" description="Add option to banner grouping and super group" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#</div>\n\n\s+<xf:js src="xf/permission\.js" min="1" />#s]]></find>
+    <replace><![CDATA[<xf:if is="$xf.options.userBanners.displayMultiple">
+	<xf:checkboxrow>
+		<xf:option name="zdess_disable_grouping"
+				   selected="$userGroup.zdess_disable_grouping"
+				   label="{{ phrase('zdess_disable_banner_grouping') }}"
+				   hint="{{ phrase('zdess_disable_banner_grouping_hint') }}"/>
+	</xf:checkboxrow>
+</xf:if>
+<xf:checkboxrow>
+	<xf:option name="zdess_super_user_group"
+			   selected="$userGroup.zdess_super_user_group"
+			   label="{{ phrase('zdess_super_user_group') }}"
+			   hint="{{ phrase('zdess_super_user_group_hint') }}"/>
+</xf:checkboxrow>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="warning_info" modification_key="zdess_modify_title_warnings_for_visitor" description="Modify title warnings for visitor's" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<xf:title>.*?</xf:title>)(.*?)(<xf:formrow label="{{ phrase\('given_by'\) }}">.*?</xf:formrow>)#is
+]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.user_id === $warning.user_id">
+	<xf:title>{{ phrase('warning') }}</xf:title>
+	<xf:else />
+	$1
+</xf:if>
+$2
+<xf:if is="$xf.visitor.canViewWarnings()">
+	$3
+</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="widget_newest_members" modification_key="zdess_modify_list_heap_displaying" description="Modify list heap displaying" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[#<ul class="listHeap">.*?</ul>#is]]></find>
+    <replace><![CDATA[<ul class="listHeap listHeap--aligned">
+	<xf:foreach loop="$users" value="$user">
+		<li>
+			<xf:macro template="zdess_member_macros" name="list_heap_aligned_item" arg-user="{$user}" />
+		</li>
+	</xf:foreach>
+</ul>]]></replace>
+  </modification>
+</template_modifications>

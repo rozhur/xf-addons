@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="app_user_banners.less" modification_key="zdsl_add_style_for_seller_banner" description="Add style for seller's banner" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+.userBanner.userBanner--seller
+{
+	.userBanner-before
+	{
+		margin-right: 2px;
+	}
+	.userBanner-before:before
+	{
+		.m-faBase();
+		.m-faContent(@fa-var-badge-check);
+	}
+}]]></replace>
+  </modification>
+  <modification type="public" template="core_labels.less" modification_key="zdsl_add_seller_label_style" description="Add seller's label style" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+.label.label--seller
+{
+	.memberHeader-name &, .memberTooltip-name &
+	{
+		font-size: 50%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	&:before
+	{
+		margin-right: 2px;
+		.m-faBase();
+		.m-faContent(@fa-var-badge-check);
+	}
+}]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdsl_add_seller_banner" description="Add 'Seller' banner" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:userbanners user="$user" tag="div" class="message-userBanner"]]></find>
+    <replace><![CDATA[$0 enable-seller-banner="true"]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="zdsl_remove_seller_label" description="Remove seller's label" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:username user="$user"]]></find>
+    <replace><![CDATA[$0 disable-seller-label="true"]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdsl_add_seller_option" description="Add 'zdsl_seller' option" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[hint="{{ phrase('if_selected_this_user_will_be_listed_publicly_as_staff_member') }}" />]]></find>
+    <replace><![CDATA[$0
+
+<xf:option name="user[zdsl_seller]" selected="$user.zdsl_seller"
+							label="{{ phrase('zdsl_display_user_as_seller') }}"
+							hint="{{ phrase('zdsl_if_selected_this_user_will_be_shown_as_seller') }}" />]]></replace>
+  </modification>
+</template_modifications>

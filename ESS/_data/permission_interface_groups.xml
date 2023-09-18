@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permission_interface_groups>
+  <interface_group interface_group_id="zdessForumModeratorPermissions" display_order="940" is_moderator="1"/>
+  <interface_group interface_group_id="zdessForumPermissions" display_order="930" is_moderator="0"/>
+  <interface_group interface_group_id="zdessModeratorPermissions" display_order="920" is_moderator="1"/>
+  <interface_group interface_group_id="zdessPermissions" display_order="900" is_moderator="0"/>
+  <interface_group interface_group_id="zdessProfilePostModeratorPermissions" display_order="980" is_moderator="1"/>
+  <interface_group interface_group_id="zdessProfilePostPermissions" display_order="960" is_moderator="0"/>
+</permission_interface_groups>

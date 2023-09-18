@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="xfrm_resource_edit" modification_key="zdta_resource_update_first_post_option" description="Add &quot;Update First post of discussion&quot; option" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[arg-previewUrl="{{ link('resources/preview', $resource) }}" />]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="!$resource.isInsert()">
+	<xf:checkboxrow>
+		<xf:option name="zdta_update_first_post" value="1"
+				   label="{{ phrase('zdta_update_first_post_of_discussion') }}" />
+	</xf:checkboxrow>
+</xf:if>]]></replace>
+  </modification>
+</template_modifications>

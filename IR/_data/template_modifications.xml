@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="account_details" modification_key="zdir_add_input_custom_link_to_account_details" description="Add input to custom link to account_details" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<hr class="formRowSep" />.*?<xf:if is="{{ \$xf\.visitor\.Profile\.dob_day#is]]></find>
+    <replace><![CDATA[<xf:macro template="zdir_macros" name="custom_link_textboxrow" 
+		  arg-target="{$xf.visitor}" 
+		  arg-link="{$link}"
+		  arg-explain="{{ phrase('zdir_if_specified_serve_as_link_to_your_profile', {'url': trim($xf.options.boardUrl, 'https://'), 'link': $link}) }}"
+		  arg-validationUrl="{{ link('members/validate-custom-link', $xf.visitor) }}"/>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="member_edit" modification_key="zdir_add_input_to_custom_link_to_member_edit" description="Add input to custom link to member edit" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[label="{{ phrase('custom_title') }}" />]]></find>
+    <replace><![CDATA[$0
+
+<xf:set var="$link" value="{{ {$user.zdir_custom_link} != '' ? {$user.zdir_custom_link} : trim(link('members', $user), '/') }}" />
+
+<xf:macro template="zdir_macros" name="custom_link_textboxrow" 
+		  arg-name="profile[zdir_custom_link]" 
+		  arg-target="{$user}" 
+		  arg-link="{$link}"
+		  arg-validationUrl="{{ link('members/validate-custom-link', $user) }}" />]]></replace>
+  </modification>
+  <modification type="public" template="thread_edit" modification_key="zdir_thread_add_input_custom_link_to_thread_edit" description="Add input to custom_link to thread edit" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<div class="block\-body">.*?)(<xf:if contentcheck="true">)#s]]></find>
+    <replace><![CDATA[$1
+
+<xf:macro template="zdir_macros" name="custom_link_textboxrow" 
+		  arg-target="{$thread}" 
+		  arg-link="{$link}"
+		  arg-explain="{{ phrase('zdir_if_specified_serve_as_link_to_that_thread', {'url': trim($xf.options.boardUrl, 'https://'), 'link': $link}) }}"
+		  arg-validationUrl="{{ link('threads/validate-custom-link', $thread) }}" />
+$2]]></replace>
+  </modification>
+  <modification type="admin" template="tools_rebuild" modification_key="zdir_add_custom_link_rebuild" description="Add custom link rebuild" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:rebuild_bottom]-->]]></find>
+    <replace><![CDATA[$0
+
+<xf:macro name="rebuild_job"
+	arg-header="{{ phrase('zdir_rebuild_custom_links') }}"
+	arg-job="ZD\IR:CustomLink" />]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="zdir_user_edit_add_input_custom_link_to_user_edit" description="Add input to custom link to user_edit" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#<xf:textboxrow name="user\[custom_title\]".*?/>#s]]></find>
+    <replace><![CDATA[$0
+<xf:textboxrow name="profile[zdir_custom_link]" value="{$user.zdir_custom_link}"
+						maxlength="{{ max_length($user, 'zdir_custom_link') }}"
+						label="{{ phrase('zdir_custom_link') }}" />]]></replace>
+  </modification>
+</template_modifications>

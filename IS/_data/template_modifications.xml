@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="zdis_add_sidebar_inner" description="Add sidebar inner for sitcky-kit working correctly" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<div class="p-body-sidebar">)(.*?)(</div>)#is]]></find>
+    <replace><![CDATA[$1<div class="p-body-sidebarInner">$2</div>$3]]></replace>
+  </modification>
+  <modification type="admin" template="PAGE_CONTAINER" modification_key="zdis_add_style_chooser_to_acp" description="Add style chooser to acp" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$xf.visitor.canChangeLanguage()">]]></find>
+    <replace><![CDATA[<xf:if is="$xf.visitor.canChangeStyle() AND $xf.style.style_id">
+	<a href="{{ link('account/style') }}" data-xf-click="overlay" data-xf-init="tooltip" title="{{ phrase('style_chooser')|for_attr }}">
+		<xf:fa icon="fa-paint-brush" /> {$xf.style.title}
+	</a>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="app.less" modification_key="zdis_add_footer_style" description="Add footer style" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[.p-footer
+{
+	background: @_adminFooter-bg;
+	border-top: @xf-borderSize solid xf-intensify(@_adminFooter-bg, 4%);
+	color: @_adminFooter-color;
+	font-size: @xf-fontSizeSmall;
+
+	.m-pageInset();
+
+	a
+	{
+		color: @_adminFooter-linkColor;
+	}
+}
+
+.p-footer-row
+{
+	.m-clearFix();
+
+	margin-bottom: -@xf-paddingLarge;
+
+	a
+	{
+		display: inline-block;
+		padding: 2px 4px;
+		border-radius: @xf-borderRadiusSmall;
+
+		&:hover
+		{
+			text-decoration: none;
+			background-color: fade(@_adminFooter-linkColor, 10%);
+		}
+
+		&.u-concealed
+		{
+			text-decoration: none !important;
+		}
+	}
+}]]></find>
+    <replace><![CDATA[.p-footer
+{
+	.xf-publicFooter();
+
+	.m-pageInset();
+
+	a
+	{
+		.xf-publicFooterLink();
+	}
+}
+
+.p-footer-row
+{
+	.m-clearFix();
+
+	margin-bottom: -@xf-paddingLarge;
+
+	a
+	{
+		display: inline-block;
+		padding: 2px 4px;
+		border-radius: @xf-borderRadiusSmall;
+
+		&:hover
+		{
+			text-decoration: none;
+			background-color: fade(@xf-publicFooterLink--color, 10%);
+		}
+
+		&.u-concealed
+		{
+			text-decoration: none !important;
+		}
+	}
+}]]></replace>
+  </modification>
+  <modification type="admin" template="app.less" modification_key="zdis_add_header_style" description="Add header style" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(@_adminHeader-bg: )(.*?);#]]></find>
+    <replace><![CDATA[$1{{ property('publicHeader--background-color') ? '@xf-publicHeader--background-color' : '@xf-paletteColor5' }};]]></replace>
+  </modification>
+  <modification type="admin" template="app.less" modification_key="zdis_add_nav_style" description="Add nav style" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[@_adminNav-bg: @xf-paletteColor5;
+@_adminNav-strongBg: xf-intensify(@xf-paletteColor5, 8%);
+@_adminNav-color: @xf-paletteColor2;
+@_adminNav-strongColor: @xf-paletteColor1;]]></find>
+    <replace><![CDATA[@_adminNav-bg: {{ property('publicNav--background-color') ? '@xf-publicNav--background-color' : '@xf-paletteColor5' }};
+@_adminNav-strongBg: xf-intensify(@_adminNav-bg, 8%);
+@_adminNav-color: {{ property('publicNav--color') ? '@xf-publicNav--color' : '@xf-paletteColor2' }};
+@_adminNav-strongColor: xf-intensify(@_adminNav-color, 8%);]]></replace>
+  </modification>
+  <modification type="public" template="app_body.less" modification_key="zdis_adds_sidebar_inner_class_for_media" description="Adds p-body-sidebarInner class instead of p-body-sidebar for media" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#.p-body-sidebar(\n\s+\{\n\s+display: flex;)#s]]></find>
+    <replace><![CDATA[.p-body-sidebar
+{
+	width: auto;
+}
+
+.p-body-sidebarInner$1]]></replace>
+  </modification>
+  <modification type="public" template="app_user_banners.less" modification_key="zdis_add_user_banners_less" description="Add zdis_user_banners.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#&\.userBanner\-\-red.*?$#is]]></find>
+    <replace><![CDATA[}
+
+{{ include('zdis_user_banners.less') }}]]></replace>
+  </modification>
+  <modification type="public" template="app_username_styles.less" modification_key="zdess_fix_username_styles_for_a_attr" description="Fix username styles for &lt;a /&gt; attr" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#\.username(\-\-.*|\n)#]]></find>
+    <replace><![CDATA[div a$0, $0]]></replace>
+  </modification>
+  <modification type="public" template="app_username_styles.less" modification_key="zdis_add_username_styles_less" description="Add zdis_username_styles.less" execution_order="5" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+{{ include('zdis_username_styles.less') }}
+]]></replace>
+  </modification>
+  <modification type="public" template="core.less" modification_key="zdis_add_core_less" description="Add zdis_core.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[/$/]]></find>
+    <replace><![CDATA[$0
+
+{{ include('zdis_core.less') }}]]></replace>
+  </modification>
+  <modification type="public" template="core_labels.less" modification_key="zdis_add_core_labels_less" description="Add zdis_core_labels.less" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#&\.label\-\-red.*?}.*?(\.label-append)#is]]></find>
+    <replace><![CDATA[}
+
+{{ include('zdis_labels.less') }}
+
+$1]]></replace>
+  </modification>
+  <modification type="public" template="helper_js_global" modification_key="zdis_add_zdis_js_template" description="Add zdis_js template" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--XF:JS-->]]></find>
+    <replace><![CDATA[$0
+
+<xf:include template="zdis_js" />]]></replace>
+  </modification>
+  <modification type="public" template="member_macros" modification_key="zdess_add_dynamic_class_in_follow_button" description="Add dynamic class in follow button" execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<xf:button href="{{ link\('members/follow', \$user\) }}"\n\s+)class="button--link"#is]]></find>
+    <replace><![CDATA[$1
+class="{{ $xf.visitor.isFollowing($user) ? 'button--link' : '' }}"]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="zdess_add_pairs_columns_style" description="Add pairs columns style" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[pairs--inline]]></find>
+    <replace><![CDATA[{{ property('zdisColumnPairsInMemberHeaderBlurb') ? 'pairs--columns pairs--fixedSmall' : '$0' }}]]></replace>
+  </modification>
+  <modification type="admin" template="user_group_edit" modification_key="zdis_add_username_css_class_option" description="Add option to username css class" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:css src="public:app_user_banners.less" />]]></find>
+    <replace><![CDATA[<xf:css src="public:app_username_styles.less" />
+<xf:formrow label="{{ phrase('zdis_username_styling') }}">
+	<xf:radio name="zdis_username_css_class"
+			  value="{{ $userGroup.zdis_username_css_class ? $userGroup.zdis_username_css_class : '' }}"
+			  listclass="listColumns">
+		<xf:option value="">
+			<span class="username" style="display: inline">{{ phrase('user_name') }}</span>
+		</xf:option>
+		
+		<xf:foreach loop="$displayStylesUsername" value="$class">
+			<xf:option value="{$class}">
+				<span title="username {$class}" class="username {$class}" data-xf-init="tooltip" style="display: inline">{{ phrase('user_name') }}</span>
+			</xf:option>
+		</xf:foreach>
+
+		<xf:option value="" selected="{{ $userGroup.zdis_username_css_class AND !in_array($userGroup.zdis_username_css_class, $displayStylesUsername) }}"
+				   label="{{ phrase('other_using_custom_css_class_name') }}">
+
+			<xf:textbox name="zdis_username_css_class"
+						value="{{ ($userGroup.zdis_username_css_class AND !in_array($userGroup.zdis_username_css_class, $displayStylesUsername)) ? $userGroup.zdis_username_css_class : '' }}"
+						maxlength="{{ max_length($userGroup, 'zdis_username_css_class') }}" />
+		</xf:option>
+	</xf:radio>
+</xf:formrow>
+
+$0]]></replace>
+  </modification>
+</template_modifications>

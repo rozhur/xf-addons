@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin_permission>
+  <admin_permission admin_permission_id="zdessCreateDeleteForum" display_order="1000"/>
+  <admin_permission admin_permission_id="zdessDebug" display_order="1010"/>
+  <admin_permission admin_permission_id="zdessDevelopment" display_order="1030"/>
+  <admin_permission admin_permission_id="zdessViewErrorLogs" display_order="1020"/>
+</admin_permission>

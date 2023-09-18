@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content_type_fields>
+  <field content_type="forum" field_name="moderator_log_handler_class">ZD\ESS\ModeratorLog\Forum</field>
+  <field content_type="warning" field_name="alert_handler_class">ZD\ESS\Alert\Warning</field>
+  <field content_type="warning" field_name="entity">XF:Warning</field>
+</content_type_fields>

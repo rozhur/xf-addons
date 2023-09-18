@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "[ZD] Improved Style",
+    "description": "Minor improvements in the behavior of styles and the display of elements.\nAs a bonus - support for templates and style settings for the Admin Panel.",
+    "version_id": 1000070,
+    "version_string": "1.0.0",
+    "dev": "ZhDev",
+    "dev_url": "https://zhdev.org",
+    "faq_url": "https://xf.zhdev.org/faq/xf-addon?id=zdis",
+    "support_url": "https://xf.zhdev.org/support/xf-addon?id=zdis",
+    "extra_urls": [],
+    "require": {
+        "XF": [2020070, "XenForo 2.2"]
+    },
+    "icon": "logo.png"
+}

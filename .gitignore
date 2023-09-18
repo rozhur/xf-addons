@@ -1,0 +1,9 @@
+.idea
+*.iml
+out
+gen
+_releases
+_output
+/BR/
+/BRS/
+/MI/

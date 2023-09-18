@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="forum" permission_id="editThreadCustomLink" permission_type="flag" interface_group_id="zdirForumPermissions" display_order="1"/>
+  <permission permission_group_id="general" permission_id="bypassCustomLinkLength" permission_type="flag" interface_group_id="zdirPermissions" display_order="10"/>
+  <permission permission_group_id="general" permission_id="bypassCustomLinkRegex" permission_type="flag" interface_group_id="zdirPermissions" display_order="20"/>
+  <permission permission_group_id="general" permission_id="editCustomLink" permission_type="flag" interface_group_id="zdirPermissions" display_order="1"/>
+</permissions>

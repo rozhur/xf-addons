@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="zdirCustomLinkLength" edit_format="template" data_type="array" validation_class="XF\Option\MinMax" validation_method="verifyOption" advanced="0">
+    <default_value>{"min":5,"max":25}</default_value>
+    <edit_format_params>template=option_template_minMax
+units={{ phrase('units_characters') }}
+max=50</edit_format_params>
+    <sub_options>min
+max</sub_options>
+    <relation group_id="zdir" display_order="10"/>
+  </option>
+  <option option_id="zdirCustomLinkRegex" edit_format="textbox" data_type="string" validation_class="ZD\IR\Option\CustomLinkValidation" validation_method="verifyOption" advanced="1">
+    <default_value>/^(?!\d)\w{1,25}(\.\w{4,25})?$/</default_value>
+    <relation group_id="zdir" display_order="20"/>
+  </option>
+  <option option_id="zdirDisallowedCustomLinks" edit_format="textbox" data_type="string" advanced="1">
+    <default_value>admin
+moderator</default_value>
+    <edit_format_params>rows=2</edit_format_params>
+    <relation group_id="zdir" display_order="30"/>
+  </option>
+  <option option_id="zdirRedirectRouteErrorsToIndex" edit_format="onoff" data_type="boolean" advanced="1">
+    <default_value>1</default_value>
+    <relation group_id="zdir" display_order="40"/>
+  </option>
+</options>
